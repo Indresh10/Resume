@@ -9,19 +9,6 @@ body {
   background-image: linear-gradient(to bottom right, green, teal);
   border-radius: 0 0 350px 350px;
 }
-.slide {
-  animation: slide-in 2s;
-  animation-delay: 1s;
-  animation-play-state: paused;
-}
 #Project {
   vertical-align: middle;
-}
-@keyframes slide-in {
-  from {
-    left: -100vh;
-  }
-  to {
-    left: 0;
-  }
 }
