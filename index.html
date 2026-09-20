@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indresh Hemani | Software Engineer @ Akasa Air & AI/MCP Specialist</title>
+    <meta name="description" content="Portfolio of Indresh Hemani - Software Engineer at Akasa Air, creator of Akasa Air MCP Server for ChatGPT, IEEE research author on AI-SIoT smart cities, and specialist in Flutter, Android, Micronaut, and AWS.">
+    <meta name="author" content="Indresh Hemani">
+
+    <!-- Open Graph / Meta -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Indresh Hemani | Software Engineer & AI/MCP Specialist">
+    <meta property="og:description" content="Software Engineer @ Akasa Air & AI/MCP Specialist. Creator of Akasa Air ChatGPT MCP Server & IEEE Research Author.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome 6 CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Devicon Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 3D Three.js Interactive WebGL Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-badge">IH</span>
+                <span>Indresh<span class="gradient-text">.dev</span></span>
+            </a>
+
+            <nav class="nav-menu-wrapper">
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#mcp-playground" class="nav-link highlight-link"><i class="fa-solid fa-robot"></i> Akasa MCP</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#research" class="nav-link">Research</a></li>
+                    <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#education" class="nav-link">Education</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Command Palette Trigger Button -->
+                <button class="cmd-palette-btn" id="open-cmd-btn" title="Quick Actions (Press Ctrl+K)">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span class="cmd-shortcut-badge"><kbd>Ctrl</kbd>+<kbd>K</kbd></span>
+                </button>
+
+                <!-- Theme Toggle Button -->
+                <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+
+                <a href="#contact" class="btn btn-primary nav-cta-btn">
+                    <i class="fa-regular fa-paper-plane"></i> Let's Connect
+                </a>
+
+                <button class="hamburger-btn" id="hamburger-btn" aria-label="Open Navigation">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="about">
+            <div class="container">
+                <div class="hero-grid">
+                    <div>
+                        <div class="status-badge">
+                            <span class="pulse-dot"></span>
+                            <span id="hero-status">Active Software Engineer @ Akasa Air & AI Innovator</span>
+                        </div>
+                        <h1 class="hero-title">
+                            Hi, I'm <span class="gradient-text" id="hero-name">Indresh Hemani</span>
+                        </h1>
+                        <div class="hero-subtitle-wrapper">
+                            <span id="typewriter-text"></span>
+                            <span class="typewriter-cursor">|</span>
+                        </div>
+                        <p class="hero-bio" id="hero-bio">
+                            Software Engineer at Akasa Air specializing in full-stack mobile systems, high-throughput microservices, and Agentic AI/MCP architectures. Proven impact delivering high-traffic airline applications serving over 500,000 passengers with a 30% crash rate reduction. Author of peer-reviewed IEEE research on AI-SIoT smart city architectures and creator of the Akasa Air Model Context Protocol (MCP) server connecting ChatGPT directly to airline operations.
+                        </p>
+
+                        <div class="hero-actions">
+                            <a href="#mcp-playground" class="btn btn-gradient">
+                                <i class="fa-solid fa-robot"></i> Try Akasa MCP Live
+                            </a>
+                            <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" class="btn btn-chatgpt">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Open in ChatGPT
+                            </a>
+                            <a href="#projects" class="btn btn-outline">
+                                <i class="fa-solid fa-code"></i> View Projects
+                            </a>
+                        </div>
+
+                        <div class="social-links">
+                            <a id="hero-github" href="https://github.com/Indresh10" target="_blank" rel="noopener" class="social-icon-btn" title="GitHub (@Indresh10)">
+                                <i class="fa-brands fa-github"></i>
+                            </a>
+                            <a id="hero-linkedin" href="https://linkedin.com/in/indresh-hemani" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
+                                <i class="fa-brands fa-linkedin-in"></i>
+                            </a>
+                            <a id="hero-chatgpt" href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" class="social-icon-btn" title="Akasa Air ChatGPT App">
+                                <i class="fa-solid fa-brain"></i>
+                            </a>
+                            <a id="hero-email" href="mailto:hemaniindresh@gmail.com" class="social-icon-btn" title="Email">
+                                <i class="fa-solid fa-envelope"></i>
+                            </a>
+                            <a id="hero-phone" href="tel:+917424905531" class="social-icon-btn" title="Phone">
+                                <i class="fa-solid fa-phone"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 3D Interactive Floating Highlight Card -->
+                    <div class="hero-3d-card tilt-card" id="hero-feature-card">
+                        <div class="hero-badge-item" onclick="scrollToSection('mcp-playground')">
+                            <div class="badge-icon purple"><i class="fa-solid fa-robot"></i></div>
+                            <div class="badge-info">
+                                <h4>Akasa Air MCP Server</h4>
+                                <p>Connected to ChatGPT &bull; 6 Live Airline Tools</p>
+                            </div>
+                            <i class="fa-solid fa-angle-right badge-arrow"></i>
+                        </div>
+                        <div class="hero-badge-item" onclick="openProjectModal('akasa-mobile')">
+                            <div class="badge-icon cyan"><i class="fa-solid fa-plane-departure"></i></div>
+                            <div class="badge-info">
+                                <h4>Akasa Air Mobile App</h4>
+                                <p>500K+ Passengers &bull; 30% Crash Reduction</p>
+                            </div>
+                            <i class="fa-solid fa-angle-right badge-arrow"></i>
+                        </div>
+                        <div class="hero-badge-item" onclick="scrollToSection('research')">
+                            <div class="badge-icon emerald"><i class="fa-solid fa-file-lines"></i></div>
+                            <div class="badge-info">
+                                <h4>IEEE 2024 Research Author</h4>
+                                <p>AI-SIoT Architecture for Smart Cities</p>
+                            </div>
+                            <i class="fa-solid fa-angle-right badge-arrow"></i>
+                        </div>
+                        <div class="hero-badge-item" onclick="scrollToSection('education')">
+                            <div class="badge-icon amber"><i class="fa-solid fa-graduation-cap"></i></div>
+                            <div class="badge-info">
+                                <h4>MCA (Artificial Intelligence)</h4>
+                                <p>Christ University &bull; Student Council Leader</p>
+                            </div>
+                            <i class="fa-solid fa-angle-right badge-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Stats Bar -->
+                <div class="stats-bar" id="stats-container">
+                    <!-- Populated dynamically from data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="section" id="experience">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Career Journey</span>
+                    <h2 class="section-title">Work Experience</h2>
+                    <p class="section-subtitle">Delivering high-scale consumer aviation products, backend microservices, and AI integrations at Akasa Air.</p>
+                </div>
+
+                <div class="timeline" id="experience-timeline">
+                    <!-- Populated dynamically from data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Akasa Air MCP Server Playground Section -->
+        <!-- Akasa Air on ChatGPT (MCP Integration Showcase) -->
+        <section class="section mcp-section" id="mcp-playground">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag special-tag"><i class="fa-solid fa-brain"></i> ChatGPT &bull; Model Context Protocol</span>
+                    <h2 class="section-title">Akasa Air on ChatGPT</h2>
+                    <p class="section-subtitle">
+                        An enterprise Model Context Protocol (MCP) integration connecting OpenAI's <strong>ChatGPT</strong> directly to real-time <strong>Akasa Air</strong> operational flight tracking, passenger bookings, live fares, and web check-in.
+                    </p>
+                </div>
+
+                <div class="mcp-console-wrapper tilt-card" style="max-width: 980px; margin: 0 auto;">
+                    <!-- ChatGPT Window Top Bar -->
+                    <div class="terminal-header chatgpt-header">
+                        <div class="chatgpt-branding">
+                            <div class="chatgpt-logo-badge">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <div>
+                                <div class="chatgpt-title-row">
+                                    <span>Akasa Air</span>
+                                    <span class="chatgpt-badge">ChatGPT App</span>
+                                </div>
+                                <div class="chatgpt-sub">
+                                    Powered by Model Context Protocol (MCP)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chatgpt-header-action">
+                            <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" class="btn btn-primary chatgpt-open-btn">
+                                <span>Try on ChatGPT</span>
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Static ChatGPT Conversation Stream -->
+                    <div class="terminal-body chatgpt-body">
+                        <div class="chat-exchange">
+                            <!-- Exchange 1: Flight Status -->
+                            <div class="chat-bubble user-bubble">
+                                <div class="chat-user-label">
+                                    <i class="fa-solid fa-user"></i> You
+                                </div>
+                                <div class="chat-msg-text">What is the operational status and departure gate for Akasa Air flight QP 1366 from Mumbai to Bengaluru?</div>
+                            </div>
+
+                            <div class="chat-bubble assistant-bubble">
+                                <div class="chat-header-row">
+                                    <span class="chat-assistant-tag">
+                                        <i class="fa-solid fa-brain"></i> ChatGPT &bull; Akasa Air Assistant
+                                    </span>
+                                </div>
+
+                                <div class="tool-invocation-callout">
+                                    <i class="fa-solid fa-bolt"></i>
+                                    <span>Executed Tool: <code class="tool-fn-name">check_flight_status_by_flight_number</code><span class="tool-fn-args">(flight_number: "QP 1366")</span></span>
+                                </div>
+
+                                <p style="margin-bottom: 1rem; font-size: 0.95rem;">
+                                    Here is the live operational status for <strong>Akasa Air Flight QP 1366</strong> on schedule today:
+                                </p>
+
+                                <div class="airline-card">
+                                    <div class="airline-card-top">
+                                        <div class="flight-number-tag"><i class="fa-solid fa-plane"></i> QP 1366</div>
+                                        <span class="flight-status-badge on-time"><i class="fa-solid fa-circle-check"></i> On Schedule</span>
+                                    </div>
+                                    <div class="flight-route-visual">
+                                        <div class="route-stop left">
+                                            <div class="stop-code">BOM</div>
+                                            <div class="stop-name">Mumbai (T1)</div>
+                                            <div class="stop-time">10:30 IST</div>
+                                        </div>
+                                        <div class="flight-midpoint">
+                                            <i class="fa-solid fa-plane-departure"></i>
+                                            <span class="flight-duration">1h 45m non-stop</span>
+                                        </div>
+                                        <div class="route-stop right">
+                                            <div class="stop-code">BLR</div>
+                                            <div class="stop-name">Bengaluru (T1)</div>
+                                            <div class="stop-time">12:10 IST</div>
+                                        </div>
+                                    </div>
+                                    <div class="flight-details-grid">
+                                        <div><div class="detail-item-val">Gate B4</div><div class="detail-item-lbl">Departure Gate</div></div>
+                                        <div><div class="detail-item-val">Boeing 737 MAX 8</div><div class="detail-item-lbl">Aircraft</div></div>
+                                        <div><div class="detail-item-val">Carousel 04</div><div class="detail-item-lbl">Baggage Claim</div></div>
+                                        <div><div class="detail-item-val" style="color: var(--accent-emerald);">Active</div><div class="detail-item-lbl">Café Akasa</div></div>
+                                    </div>
+                                </div>
+
+                                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.92rem;">
+                                    Boarding is on schedule at <strong>Mumbai T1, Gate B4</strong>. Estimated arrival at Bengaluru is <strong>12:10 IST</strong>.
+                                </p>
+                            </div>
+
+                            <!-- Exchange 2: Booking Lookup -->
+                            <div class="chat-bubble user-bubble" style="margin-top: 0.8rem;">
+                                <div class="chat-user-label">
+                                    <i class="fa-solid fa-user"></i> You
+                                </div>
+                                <div class="chat-msg-text">Can you look up my booking reference ABC123 and check my seat and web check-in eligibility?</div>
+                            </div>
+
+                            <div class="chat-bubble assistant-bubble">
+                                <div class="chat-header-row">
+                                    <span class="chat-assistant-tag">
+                                        <i class="fa-solid fa-brain"></i> ChatGPT &bull; Akasa Air Assistant
+                                    </span>
+                                </div>
+
+                                <div class="tool-invocation-callout">
+                                    <i class="fa-solid fa-bolt"></i>
+                                    <span>Executed Tool: <code class="tool-fn-name">check_flight_status_by_record_locator</code><span class="tool-fn-args">(record_locator: "ABC123")</span></span>
+                                </div>
+
+                                <p style="margin-bottom: 1rem; font-size: 0.95rem;">
+                                    I found your booking confirmation for record locator <strong>ABC123</strong>:
+                                </p>
+
+                                <div class="airline-card pnr-card">
+                                    <div class="airline-card-top">
+                                        <div class="flight-number-tag pnr-tag">
+                                            <i class="fa-solid fa-ticket"></i> PNR: ABC123
+                                        </div>
+                                        <span class="flight-status-badge on-time">
+                                            <i class="fa-solid fa-circle-check"></i> Confirmed
+                                        </span>
+                                    </div>
+                                    <div class="flight-details-grid">
+                                        <div><div class="detail-item-val">Hemani / Indresh Mr</div><div class="detail-item-lbl">Passenger</div></div>
+                                        <div><div class="detail-item-val">12A (Window Extra Legroom)</div><div class="detail-item-lbl">Seat</div></div>
+                                        <div><div class="detail-item-val">QP 1366 (BOM &rarr; BLR)</div><div class="detail-item-lbl">Flight</div></div>
+                                        <div><div class="detail-item-val text-accent">Eligible for Check-in</div><div class="detail-item-lbl">Web Check-in</div></div>
+                                    </div>
+                                </div>
+
+                                <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.92rem;">
+                                    You are eligible for web check-in. You can complete check-in directly through Akasa Air's official portal.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Bottom Bar -->
+                    <div class="chatgpt-cta-footer">
+                        <div>
+                            <div class="chatgpt-cta-title">
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color: #10a37f;"></i> Want to try it live?
+                            </div>
+                            <div class="chatgpt-cta-sub">
+                                Test flight lookups, real-time booking inquiries, and fare searches directly using the official Akasa Air ChatGPT extension.
+                            </div>
+                        </div>
+                        <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" class="btn btn-primary chatgpt-cta-btn">
+                            <i class="fa-solid fa-brain"></i>
+                            <span>Open in ChatGPT</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="section" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Engineering Portfolio</span>
+                    <h2 class="section-title">Featured Projects</h2>
+                    <p class="section-subtitle">High-scale production systems, AI & Agentic integrations, and community applications I've developed.</p>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="project-filters">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="ai">AI, MCP & IoT</button>
+                    <button class="filter-btn" data-filter="mobile">Mobile & Cloud</button>
+                    <button class="filter-btn" data-filter="backend">Backend & APIs</button>
+                </div>
+
+                <div class="projects-grid" id="projects-container">
+                    <!-- Populated dynamically from data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Research & IEEE Publications Section -->
+        <section class="section" id="research">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag"><i class="fa-solid fa-graduation-cap"></i> Academic Contributions</span>
+                    <h2 class="section-title">Research & IEEE Publications</h2>
+                    <p class="section-subtitle">Peer-reviewed publications advancing distributed architectures, Internet of Things, and Artificial Intelligence.</p>
+                </div>
+
+                <div class="research-container" id="research-container">
+                    <!-- Populated dynamically from data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="section" id="skills">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Technical Stack</span>
+                    <h2 class="section-title">Skills & Technologies</h2>
+                    <p class="section-subtitle">Comprehensive technical skills spanning cross-platform mobile, microservices, cloud infrastructure, and Agentic AI.</p>
+                </div>
+
+                <div class="skills-grid" id="skills-container">
+                    <!-- Populated dynamically from data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="section" id="education">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">Academic Background</span>
+                    <h2 class="section-title">Education & Leadership</h2>
+                    <p class="section-subtitle">Academic foundations in Computer Applications, Artificial Intelligence, and University Student Council Leadership.</p>
+                </div>
+
+                <div class="education-grid" id="education-container">
+                    <!-- Populated dynamically from data.js -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section" id="contact">
+            <div class="container contact-container">
+                <div class="tilt-card contact-card">
+                    <div class="contact-icon-large">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </div>
+                    <h2 class="section-title">Let's Connect & Build</h2>
+                    <p class="section-subtitle" style="margin-bottom: 2rem;">
+                        Interested in discussing high-scale mobile engineering, MCP Agentic AI systems, or full-stack opportunities? Reach out anytime!
+                    </p>
+
+                    <div class="contact-info-grid">
+                        <div class="contact-info-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <h4>Email</h4>
+                            <p id="contact-email-text">hemaniindresh@gmail.com</p>
+                            <button class="copy-btn" onclick="copyToClipboard('hemaniindresh@gmail.com', 'Email copied to clipboard!')">
+                                <i class="fa-regular fa-copy"></i> Copy Email
+                            </button>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <h4>Phone</h4>
+                            <p id="contact-phone-text">+91-7424905531</p>
+                            <button class="copy-btn" onclick="copyToClipboard('+917424905531', 'Phone number copied to clipboard!')">
+                                <i class="fa-regular fa-copy"></i> Copy Phone
+                            </button>
+                        </div>
+                        <div class="contact-info-item">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <h4>Location</h4>
+                            <p id="contact-location-text">Mumbai, India</p>
+                            <span class="pill-tag" style="display:inline-block; margin-top:0.6rem;">Senior Software Engineer @ Akasa Air</span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                        <a href="mailto:hemaniindresh@gmail.com" class="btn btn-primary">
+                            <i class="fa-solid fa-envelope-open-text"></i> Send Direct Email
+                        </a>
+                        <a href="https://linkedin.com/in/indresh-hemani" target="_blank" rel="noopener" class="btn btn-outline">
+                            <i class="fa-brands fa-linkedin"></i> Connect on LinkedIn
+                        </a>
+                        <a href="https://github.com/Indresh10" target="_blank" rel="noopener" class="btn btn-outline">
+                            <i class="fa-brands fa-github"></i> Visit GitHub (@Indresh10)
+                        </a>
+                        <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" class="btn btn-chatgpt">
+                            <i class="fa-solid fa-robot"></i> Try Akasa ChatGPT App
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Interactive Quick Action Button -->
+    <div class="floating-mcp-launcher" onclick="scrollToSection('mcp-playground')" title="Jump to Interactive Akasa MCP Playground">
+        <span class="pulse-ring"></span>
+        <i class="fa-solid fa-robot"></i>
+        <span class="fab-label">Test Akasa MCP</span>
+    </div>
+
+    <!-- Quick Command Palette Modal (Ctrl+K) -->
+    <div class="modal-backdrop" id="cmd-palette-backdrop">
+        <div class="cmd-palette-window">
+            <div class="cmd-palette-input-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="cmd-palette-input" placeholder="Type a command, project, or section to navigate..." autocomplete="off">
+                <span class="cmd-esc-tag">ESC</span>
+            </div>
+            <div class="cmd-palette-list" id="cmd-palette-list">
+                <!-- Populated dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Deep-Dive Modal -->
+    <div class="modal-backdrop" id="project-modal-backdrop">
+        <div class="project-modal-window" id="project-modal-content">
+            <!-- Populated dynamically on click -->
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check" style="color: var(--accent-cyan);"></i>
+        <span id="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Back to Top">
+                <i class="fa-solid fa-arrow-up"></i>
+            </button>
+            <p>&copy; 2026 Indresh Hemani &bull; Software Engineer @ Akasa Air & AI Researcher</p>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">
+                Powered by Three.js & Model Context Protocol &bull; 
+                <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" style="color: var(--accent-cyan);">Akasa ChatGPT Plugin (App ID: plugin_asdk_app)</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Three.js Library CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- Application Scripts -->
+    <script src="js/data.js"></script>
+    <script src="js/scene3d.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
