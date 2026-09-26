@@ -716,6 +716,11 @@ window.toggleMusicVibe = function () {
         stopVibeAudio();
         showToast('⏸️ Equalizer paused. Tap again to groove!');
     }
+
+    if (typeof renderCommandList === 'function') {
+        const input = document.getElementById('cmd-palette-input');
+        renderCommandList(input ? input.value : '');
+    }
 };
 
 window.openCommandPaletteWithQuery = function (query) {
@@ -822,6 +827,8 @@ window.closeProjectModal = function () {
 // ==========================================================================
 // Command Palette (Ctrl+K / Cmd+K)
 // ==========================================================================
+let renderCommandList = null;
+
 const COMMAND_ITEMS = [
     { title: "About Me & Mobile Craftsmanship", desc: "Java/XML roots, engineering philosophy & pillars", cat: "About", action: () => { closeCommandPalette(); scrollToSection('about'); } },
     { title: "Mobile Phone: Boarding Pass Screen", desc: "Interactive Akasa Air mobile pass on device", cat: "Mobile", action: () => { closeCommandPalette(); switchPhoneScreen('flight'); scrollToSection('hero'); } },
@@ -836,6 +843,20 @@ const COMMAND_ITEMS = [
     { title: "Education & Leadership", desc: "Christ University & Student Placement Coordinator", cat: "Navigation", action: () => { closeCommandPalette(); scrollToSection('education'); } },
     { title: "Toggle Dark / Light Theme", desc: "Switch theme palette dynamically", cat: "Action", action: () => { closeCommandPalette(); document.getElementById('theme-toggle-btn').click(); } },
     { title: "Copy Contact Email", desc: "hemaniindresh@gmail.com", cat: "Action", action: () => { closeCommandPalette(); copyToClipboard('hemaniindresh@gmail.com', 'Email copied!'); } },
+    {
+        get title() { return isMusicVibePlaying ? "Stop the Vibe 🎵" : "Start the Vibe 🎵"; },
+        get desc() { return isMusicVibePlaying ? "Pause the retro jazz synth chillhop session" : "Play retro chillhop & lo-fi jazz synth chords"; },
+        cat: "Action",
+        action: () => {
+            closeCommandPalette();
+            if (typeof toggleMusicVibe === 'function') {
+                toggleMusicVibe();
+            } else {
+                const fab = document.getElementById('floating-vibe-fab');
+                if (fab) fab.click();
+            }
+        }
+    },
     { title: "Open GitHub Profile", desc: "github.com/Indresh10", cat: "External", action: () => { window.open('https://github.com/Indresh10', '_blank'); closeCommandPalette(); } }
 ];
 
@@ -847,7 +868,7 @@ function initCommandPalette() {
 
     if (!backdrop || !input || !list) return;
 
-    function renderList(query = '') {
+    renderCommandList = function (query = '') {
         const q = query.toLowerCase().trim();
         const filtered = COMMAND_ITEMS.filter(item =>
             item.title.toLowerCase().includes(q) ||
@@ -876,16 +897,16 @@ function initCommandPalette() {
                 filtered[index].action();
             });
         });
-    }
+    };
 
-    renderList();
+    renderCommandList();
 
     if (triggerBtn) {
         triggerBtn.addEventListener('click', () => openCommandPalette());
     }
 
     input.addEventListener('input', () => {
-        renderList(input.value);
+        renderCommandList(input.value);
     });
 
     // Global keyboard shortcut: Ctrl+K / Cmd+K / Escape
@@ -923,6 +944,9 @@ window.openCommandPalette = function () {
     if (backdrop && input) {
         backdrop.classList.add('open');
         input.value = '';
+        if (typeof renderCommandList === 'function') {
+            renderCommandList('');
+        }
         input.focus();
     }
 };
