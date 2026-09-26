@@ -21,7 +21,7 @@ const portfolioData = {
         githubUsername: "Indresh10",
         linkedin: "https://linkedin.com/in/indresh-hemani",
         linkedinUsername: "indresh-hemani",
-        summary: "Got into app development back in the Java and XML days—before Kotlin was standard—and I've loved building for screens ever since. Today, my toolkit spans Flutter, Kotlin, Jetpack Compose, and Swift, backed by full-stack experience. At Akasa Air, I turn complex problems into simple, shippable products for 500K+ passengers, shaping lightweight API contracts, cutting crash rates by 30%, and engineering enterprise MCP AI integrations.",
+        summary: "Building for screens since the Android XML era. Today I lead full-lifecycle mobile engineering across Flutter and native platforms at Akasa Air—delivering rock-solid apps for 500K+ flyers and crafting production MCP servers for autonomous AI.",
         heroPitch: "Turning complex, messy problems into simple, shippable products—from robust mobile architectures to live production AI systems.",
         statusBadge: "Senior Mobile Systems Engineer @ Akasa Air & AI Innovator"
     },

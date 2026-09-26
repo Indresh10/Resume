@@ -23,8 +23,8 @@
     --accent-chatgpt: #10a37f;
 
     --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --text-muted: #64748b;
+    --text-secondary: #c2cbd8;
+    --text-muted: #a2abb8;
 
     --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
     --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -618,7 +618,7 @@ a {
 }
 
 .typewriter-cursor {
-    color: var(--accent-cyan);
+    color: var(--accent-emerald);
     animation: blink 1s step-end infinite;
     font-weight: 300;
     margin-left: 2px;
@@ -4639,6 +4639,16 @@ a {
     .floating-mcp-launcher {
         display: none !important;
     }
+}
+
+.hero-subtitle-wrapper {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px 25px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    border: 1px solid var(--border-glow);
+    color: var(--accent-emerald);
 }
 
 @media (max-width: 880px) {
