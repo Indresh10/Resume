@@ -88,7 +88,7 @@
     const heroGroup = new THREE.Group();
     heroGroup.position.set(7.5, 0.8, 0);
 
-    // 1. Core Polyhedron
+    // 1. Core Polyhedron & Luminous Energy Core
     const innerGeom = new THREE.IcosahedronGeometry(4.2, 0);
     const innerMat = new THREE.MeshPhongMaterial({
         color: 0x0a0f1d,
@@ -102,6 +102,17 @@
     const innerMesh = new THREE.Mesh(innerGeom, innerMat);
     heroGroup.add(innerMesh);
 
+    // Inner Glowing Core (Energetic Corona)
+    const coreGeom = new THREE.SphereGeometry(2.4, 24, 24);
+    const coreMat = new THREE.MeshBasicMaterial({
+        color: 0x00f0ff,
+        transparent: true,
+        opacity: 0.28,
+        blending: THREE.AdditiveBlending
+    });
+    const coreMesh = new THREE.Mesh(coreGeom, coreMat);
+    heroGroup.add(coreMesh);
+
     // Wireframe Cage
     const wireGeom = new THREE.IcosahedronGeometry(4.35, 1);
     const wireMat = new THREE.MeshBasicMaterial({
@@ -113,7 +124,7 @@
     const wireMesh = new THREE.Mesh(wireGeom, wireMat);
     heroGroup.add(wireMesh);
 
-    // 2. Surrounding Orbital Rings
+    // 2. Surrounding Orbital Rings (Gyroscopic Triad)
     const ring1Geom = new THREE.TorusGeometry(6.2, 0.05, 16, 100);
     const ring1Mat = new THREE.MeshBasicMaterial({
         color: 0x8b5cf6,
@@ -135,47 +146,154 @@
     ring2.rotation.x = -Math.PI / 6;
     heroGroup.add(ring2);
 
-    // 3. Floating satellite nodes
-    const satelliteCount = 8;
+    // Ring 3: Outer Telemetry Orbital Ring
+    const ring3Geom = new THREE.TorusGeometry(8.6, 0.03, 16, 120);
+    const ring3Mat = new THREE.MeshBasicMaterial({
+        color: 0x38bdf8,
+        transparent: true,
+        opacity: 0.35
+    });
+    const ring3 = new THREE.Mesh(ring3Geom, ring3Mat);
+    ring3.rotation.z = Math.PI / 5;
+    ring3.rotation.y = -Math.PI / 3;
+    heroGroup.add(ring3);
+
+    // 3. Floating Satellite Nodes & Telemetry Beacons
+    const satelliteCount = 10;
     const satellites = [];
-    const satGeom = new THREE.SphereGeometry(0.2, 8, 8);
-    const satMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+    const satColors = [0x00f0ff, 0x8b5cf6, 0x38bdf8, 0x10b981, 0xa855f7];
 
     for (let s = 0; s < satelliteCount; s++) {
-        const sat = new THREE.Mesh(satGeom, satMat);
+        const satColor = satColors[s % satColors.length];
+        const satContainer = new THREE.Group();
+
+        // Central satellite bead
+        const satGeom = new THREE.SphereGeometry(0.22, 10, 10);
+        const satMat = new THREE.MeshBasicMaterial({ color: satColor });
+        const satMesh = new THREE.Mesh(satGeom, satMat);
+        satContainer.add(satMesh);
+
+        // Orbital beacon halo ring
+        const haloGeom = new THREE.RingGeometry(0.28, 0.36, 16);
+        const haloMat = new THREE.MeshBasicMaterial({
+            color: satColor,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.7,
+            blending: THREE.AdditiveBlending
+        });
+        const haloMesh = new THREE.Mesh(haloGeom, haloMat);
+        satContainer.add(haloMesh);
+
         const angle = (s / satelliteCount) * Math.PI * 2;
-        const satRadius = 6.2;
-        sat.position.set(Math.cos(angle) * satRadius, Math.sin(angle) * satRadius * 0.5, Math.sin(angle) * 3);
-        heroGroup.add(sat);
-        satellites.push({ mesh: sat, baseAngle: angle, speed: 0.015 + s * 0.003, radius: satRadius });
+        const satRadius = 5.8 + (s % 3) * 1.3;
+        const speed = 0.012 + (s % 4) * 0.004;
+
+        satContainer.position.set(
+            Math.cos(angle) * satRadius,
+            Math.sin(angle) * satRadius * 0.45,
+            Math.sin(angle * 1.5) * 3
+        );
+
+        heroGroup.add(satContainer);
+        satellites.push({
+            group: satContainer,
+            mesh: satMesh,
+            halo: haloMesh,
+            baseAngle: angle,
+            speed: speed,
+            radius: satRadius,
+            phase: s * 0.6
+        });
     }
 
     scene.add(heroGroup);
 
-    // --- Interactive Shockwave Ring Generator ---
+    // --- Interactive Shockwave Ring Generator (Cross-Platform Windows & Mac) ---
     const shockwaves = [];
-    function createShockwave(x, y) {
-        const ringGeo = new THREE.RingGeometry(0.1, 0.35, 32);
+    const raycaster = new THREE.Raycaster();
+
+    function create3DShockwave(clientX, clientY) {
+        if (!camera) return;
+
+        // 1. Raycast into 3D camera space so it's ALWAYS directly under the cursor in 3D world space
+        const mouseNdc = new THREE.Vector2(
+            (clientX / window.innerWidth) * 2 - 1,
+            -(clientY / window.innerHeight) * 2 + 1
+        );
+
+        raycaster.setFromCamera(mouseNdc, camera);
+
+        // Position shockwave 14 units directly in front of camera along the ray
+        const wavePos = new THREE.Vector3();
+        raycaster.ray.at(14, wavePos);
+
+        const ringGeo = new THREE.RingGeometry(0.18, 0.45, 36);
+        const isCyan = Math.random() > 0.4;
         const ringMat = new THREE.MeshBasicMaterial({
-            color: Math.random() > 0.5 ? 0x00f0ff : 0x8b5cf6,
+            color: isCyan ? 0x00f0ff : 0x8b5cf6,
             side: THREE.DoubleSide,
             transparent: true,
-            opacity: 0.9,
-            blending: THREE.AdditiveBlending
+            opacity: 0.95,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false, // Critical for Windows Direct3D/ANGLE blending
+            depthTest: true
         });
+
         const wave = new THREE.Mesh(ringGeo, ringMat);
-        wave.position.set((x - 0.5) * 20, -(y - 0.5) * 15, 5);
+        wave.position.copy(wavePos);
+        // Ensure shockwave ring always faces the camera directly!
+        wave.quaternion.copy(camera.quaternion);
+
         scene.add(wave);
-        shockwaves.push({ mesh: wave, scale: 1, maxScale: 18, opacity: 0.9 });
+        shockwaves.push({ 
+            mesh: wave, 
+            scale: 1, 
+            maxScale: 22, 
+            opacity: 0.95,
+            growRate: 0.55,
+            fadeRate: 0.025
+        });
     }
 
-    window.addEventListener('click', (e) => {
-        // Don't trigger if clicking interactive inputs
-        if (e.target.closest('input, button, a, .mcp-console-wrapper, .modal-backdrop')) return;
-        const normX = e.clientX / window.innerWidth;
-        const normY = e.clientY / window.innerHeight;
-        createShockwave(normX, normY);
-    });
+    // Interactive DOM Surface Shockwave (Guarantees immediate visual feedback on Windows & over cards)
+    function createDOMShockwave(clientX, clientY) {
+        const ripple = document.createElement('div');
+        ripple.className = 'shockwave-dom-pulse';
+        ripple.style.left = `${clientX}px`;
+        ripple.style.top = `${clientY}px`;
+        ripple.style.borderColor = Math.random() > 0.5 ? 'var(--accent-cyan)' : 'var(--accent-purple)';
+        document.body.appendChild(ripple);
+
+        setTimeout(() => {
+            if (ripple && ripple.parentNode) {
+                ripple.parentNode.removeChild(ripple);
+            }
+        }, 800);
+    }
+
+    function triggerShockwave(clientX, clientY) {
+        create3DShockwave(clientX, clientY);
+        createDOMShockwave(clientX, clientY);
+    }
+
+    // Windows & Mac Unified Event Listener:
+    // pointerdown fires immediately on Windows (touch, touchpad, mouse) without click-drag cancellation
+    let lastShockwaveTime = 0;
+    function onPointerDownShockwave(e) {
+        // Don't trigger if clicking interactive inputs or controls
+        if (e.target.closest('input, textarea, button, a, select, .dynamic-island, .tab-btn, .modal-backdrop, .modal-content, .command-palette-modal')) {
+            return;
+        }
+
+        const now = performance.now();
+        if (now - lastShockwaveTime < 80) return; // Debounce rapid micro-events
+        lastShockwaveTime = now;
+
+        triggerShockwave(e.clientX, e.clientY);
+    }
+
+    window.addEventListener('pointerdown', onPointerDownShockwave, { passive: true });
 
     // --- Interactive Mouse & Scroll Physics ---
     let mouseX = 0;
@@ -224,23 +342,52 @@
         const maxScroll = Math.max(document.body.scrollHeight - window.innerHeight, 1);
         const scrollFraction = scrollY / maxScroll;
 
-        // Rotate Hero Object
+        // Rotate Hero Planet & Energy Core
         innerMesh.rotation.x = elapsedTime * 0.2;
         innerMesh.rotation.y = elapsedTime * 0.3;
         wireMesh.rotation.x = -elapsedTime * 0.15;
         wireMesh.rotation.y = -elapsedTime * 0.25;
 
+        // Core pulsating respiration
+        const corePulse = 1 + Math.sin(elapsedTime * 2.2) * 0.07;
+        coreMesh.scale.set(corePulse, corePulse, corePulse);
+        coreMesh.material.opacity = 0.22 + Math.sin(elapsedTime * 3) * 0.1;
+
+        // Gyroscopic Rings Rotation
         ring1.rotation.z = elapsedTime * 0.35;
         ring1.rotation.y = Math.sin(elapsedTime * 0.5) * 0.5;
         ring2.rotation.z = -elapsedTime * 0.25;
+        ring3.rotation.x = elapsedTime * 0.2;
+        ring3.rotation.z = -elapsedTime * 0.15;
 
-        // Orbit satellites
+        // Orbit Telemetry Satellites with Beacon Pulses
         satellites.forEach(sat => {
-            const currentAngle = sat.baseAngle + elapsedTime * sat.speed * 40;
-            sat.mesh.position.x = Math.cos(currentAngle) * sat.radius;
-            sat.mesh.position.y = Math.sin(currentAngle) * (sat.radius * 0.4);
-            sat.mesh.position.z = Math.sin(currentAngle) * 3;
+            const currentAngle = sat.baseAngle + elapsedTime * sat.speed * 35;
+            sat.group.position.x = Math.cos(currentAngle) * sat.radius;
+            sat.group.position.y = Math.sin(currentAngle) * (sat.radius * 0.45);
+            sat.group.position.z = Math.sin(currentAngle * 1.5) * 3;
+
+            // Halo ring spin and beacon luminescence pulse
+            sat.halo.rotation.z += 0.04;
+            sat.halo.material.opacity = 0.35 + Math.sin(elapsedTime * 4.5 + sat.phase) * 0.35;
         });
+
+        // Periodic Cosmic Telemetry Radar Ping from Planet Core
+        if (Math.floor(elapsedTime * 10) % 45 === 0 && shockwaves.length < 5) {
+            const pingGeo = new THREE.RingGeometry(0.2, 0.45, 32);
+            const pingMat = new THREE.MeshBasicMaterial({
+                color: 0x00f0ff,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0.6,
+                blending: THREE.AdditiveBlending
+            });
+            const pingWave = new THREE.Mesh(pingGeo, pingMat);
+            pingWave.position.copy(heroGroup.position);
+            pingWave.rotation.x = Math.PI / 2.5;
+            scene.add(pingWave);
+            shockwaves.push({ mesh: pingWave, scale: 1, maxScale: 22, opacity: 0.6 });
+        }
 
         // Rotate background starfield
         particles.rotation.y = elapsedTime * 0.02 + mouseX * 0.1;
@@ -258,13 +405,17 @@
         // Animate shockwaves
         for (let i = shockwaves.length - 1; i >= 0; i--) {
             const sw = shockwaves[i];
-            sw.scale += 0.4;
-            sw.opacity -= 0.02;
+            sw.scale += sw.growRate || 0.5;
+            sw.opacity -= sw.fadeRate || 0.025;
             sw.mesh.scale.set(sw.scale, sw.scale, 1);
             sw.mesh.material.opacity = Math.max(0, sw.opacity);
+            // Keep billboarded facing camera
+            sw.mesh.quaternion.copy(camera.quaternion);
 
             if (sw.opacity <= 0) {
                 scene.remove(sw.mesh);
+                if (sw.mesh.geometry) sw.mesh.geometry.dispose();
+                if (sw.mesh.material) sw.mesh.material.dispose();
                 shockwaves.splice(i, 1);
             }
         }

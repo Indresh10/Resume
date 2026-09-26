@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indresh Hemani | Software Engineer @ Akasa Air & AI/MCP Specialist</title>
-    <meta name="description" content="Portfolio of Indresh Hemani - Software Engineer at Akasa Air, creator of Akasa Air MCP Server for ChatGPT, IEEE research author on AI-SIoT smart cities, and specialist in Flutter, Android, Micronaut, and AWS.">
+    <meta name="description"
+        content="Portfolio of Indresh Hemani - Software Engineer at Akasa Air,worked on Akasa Air MCP Server for ChatGPT, IEEE research author on AI-SIoT smart cities, and specialist in Flutter, Android and Rest APIs.">
     <meta name="author" content="Indresh Hemani">
 
     <!-- Open Graph / Meta -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Indresh Hemani | Software Engineer & AI/MCP Specialist">
-    <meta property="og:description" content="Software Engineer @ Akasa Air & AI/MCP Specialist. Creator of Akasa Air ChatGPT MCP Server & IEEE Research Author.">
+    <meta property="og:description"
+        content="Software Engineer @ Akasa Air & AI/MCP Specialist. Creator of Akasa Air ChatGPT MCP Server & IEEE Research Author.">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- FontAwesome 6 CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Devicon Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
@@ -26,6 +33,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
     <!-- 3D Three.js Interactive WebGL Background Canvas -->
@@ -43,7 +51,8 @@
                 <ul class="nav-links" id="nav-links">
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#experience" class="nav-link">Experience</a></li>
-                    <li><a href="#mcp-playground" class="nav-link highlight-link"><i class="fa-solid fa-robot"></i> Akasa MCP</a></li>
+                    <li><a href="#mcp-playground" class="nav-link highlight-link"><i class="fa-solid fa-robot"></i>
+                            Akasa MCP</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
                     <li><a href="#research" class="nav-link">Research</a></li>
                     <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -59,8 +68,15 @@
                     <span class="cmd-shortcut-badge"><kbd>Ctrl</kbd>+<kbd>K</kbd></span>
                 </button>
 
+                <!-- Retro Beats & Jazz Vibe Player Button -->
+                <button class="vibe-nav-btn" id="vibe-nav-btn" onclick="toggleMusicVibe()" title="Retro Beats & Jazz Vibe (Kishore Kumar, 90s Bollywood & Jazz)">
+                    <i class="fa-solid fa-music"></i>
+                    <span class="vibe-pill-text">Chill Vibe</span>
+                </button>
+
                 <!-- Theme Toggle Button -->
-                <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Theme" title="Toggle Dark/Light Mode">
+                <button class="theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Theme"
+                    title="Toggle Dark/Light Mode">
                     <i class="fa-solid fa-sun"></i>
                 </button>
 
@@ -77,7 +93,7 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero-section" id="about">
+        <section class="hero-section" id="hero">
             <div class="container">
                 <div class="hero-grid">
                     <div>
@@ -93,14 +109,19 @@
                             <span class="typewriter-cursor">|</span>
                         </div>
                         <p class="hero-bio" id="hero-bio">
-                            Software Engineer at Akasa Air specializing in full-stack mobile systems, high-throughput microservices, and Agentic AI/MCP architectures. Proven impact delivering high-traffic airline applications serving over 500,000 passengers with a 30% crash rate reduction. Author of peer-reviewed IEEE research on AI-SIoT smart city architectures and creator of the Akasa Air Model Context Protocol (MCP) server connecting ChatGPT directly to airline operations.
+                            Software Engineer at Akasa Air specializing in full-stack mobile systems, high-throughput
+                            microservices, and Agentic AI/MCP architectures. Proven impact delivering high-traffic
+                            airline applications serving over 500,000 passengers with a 30% crash rate reduction. Author
+                            of peer-reviewed IEEE research on AI-SIoT smart city architectures and creator of the Akasa
+                            Air Model Context Protocol (MCP) server connecting ChatGPT directly to airline operations.
                         </p>
 
                         <div class="hero-actions">
                             <a href="#mcp-playground" class="btn btn-gradient">
                                 <i class="fa-solid fa-robot"></i> Try Akasa MCP Live
                             </a>
-                            <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" class="btn btn-chatgpt">
+                            <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa"
+                                target="_blank" rel="noopener" class="btn btn-chatgpt">
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Open in ChatGPT
                             </a>
                             <a href="#projects" class="btn btn-outline">
@@ -109,16 +130,21 @@
                         </div>
 
                         <div class="social-links">
-                            <a id="hero-github" href="https://github.com/Indresh10" target="_blank" rel="noopener" class="social-icon-btn" title="GitHub (@Indresh10)">
+                            <a id="hero-github" href="https://github.com/Indresh10" target="_blank" rel="noopener"
+                                class="social-icon-btn" title="GitHub (@Indresh10)">
                                 <i class="fa-brands fa-github"></i>
                             </a>
-                            <a id="hero-linkedin" href="https://linkedin.com/in/indresh-hemani" target="_blank" rel="noopener" class="social-icon-btn" title="LinkedIn">
+                            <a id="hero-linkedin" href="https://linkedin.com/in/indresh-hemani" target="_blank"
+                                rel="noopener" class="social-icon-btn" title="LinkedIn">
                                 <i class="fa-brands fa-linkedin-in"></i>
                             </a>
-                            <a id="hero-chatgpt" href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" class="social-icon-btn" title="Akasa Air ChatGPT App">
+                            <a id="hero-chatgpt"
+                                href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa"
+                                target="_blank" rel="noopener" class="social-icon-btn" title="Akasa Air ChatGPT App">
                                 <i class="fa-solid fa-brain"></i>
                             </a>
-                            <a id="hero-email" href="mailto:hemaniindresh@gmail.com" class="social-icon-btn" title="Email">
+                            <a id="hero-email" href="mailto:hemaniindresh@gmail.com" class="social-icon-btn"
+                                title="Email">
                                 <i class="fa-solid fa-envelope"></i>
                             </a>
                             <a id="hero-phone" href="tel:+917424905531" class="social-icon-btn" title="Phone">
@@ -171,13 +197,242 @@
             </div>
         </section>
 
+        <!-- About Section: The Mobile Craft & Beyond The Code -->
+        <section class="section" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag"><i class="fa-solid fa-compass"></i> The Mobile Craft</span>
+                    <h2 class="section-title">From Java & XML Roots to Modern Scale</h2>
+                    <p class="section-subtitle">
+                        Turning complex, messy problems into simple, shippable products—from hand-crafted Android XMLs to Kotlin, Compose, Flutter, Swift, and enterprise Agentic AI.
+                    </p>
+                </div>
+
+                <!-- Story & Philosophy Grid -->
+                <div class="about-hero-story-grid">
+                    <div class="about-story-card tilt-card">
+                        <div class="story-tag"><i class="fa-solid fa-code-commit"></i> The Journey</div>
+                        <h3>Rooted in Screens Before Kotlin Was Standard</h3>
+                        <p>
+                            Got into app development back in the <strong>Java and XML days</strong>—before Kotlin was standard—and I've loved building for screens ever since. Today, my toolkit spans <strong>Flutter, Kotlin, Jetpack Compose, and Swift</strong>, backed by full-stack distributed systems experience.
+                        </p>
+                        <div class="evolution-track">
+                            <div class="evolution-step">
+                                <div class="step-dot"><i class="fa-brands fa-java"></i></div>
+                                <div class="step-info">
+                                    <h4>The Java & XML Era</h4>
+                                    <p>Foundations in low-level Android lifecycle, RelativeLayouts, ListViews & memory constraints.</p>
+                                </div>
+                            </div>
+                            <div class="evolution-step">
+                                <div class="step-dot"><i class="devicon-kotlin-plain"></i></div>
+                                <div class="step-info">
+                                    <h4>Kotlin & Declarative Era</h4>
+                                    <p>Reactive Coroutines, StateFlow, Jetpack Compose, MVVM Clean Architecture & LeakCanary profiling.</p>
+                                </div>
+                            </div>
+                            <div class="evolution-step">
+                                <div class="step-dot"><i class="devicon-flutter-plain"></i></div>
+                                <div class="step-info">
+                                    <h4>Flutter, Swift & AI Agents</h4>
+                                    <p>Shipping 500K+ passenger scale at Akasa Air, Micronaut microservices & Model Context Protocol (MCP) servers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-philosophy-card tilt-card">
+                        <div class="story-tag"><i class="fa-solid fa-brain"></i> Core Philosophy</div>
+                        <h3>Turning Messy Problems into Shippable Products</h3>
+                        <div class="quote-callout">
+                            <i class="fa-solid fa-quote-left quote-icon"></i>
+                            <p>
+                                "I don't treat the mobile app as an isolated box. Because I understand backend systems, I shape API contracts so the client stays lightweight, turn vague product requirements into clean UI flows, and ensure state management doesn't collapse under real-world use."
+                            </p>
+                        </div>
+                        <div class="philosophy-badges-grid">
+                            <div class="phil-badge">
+                                <i class="fa-solid fa-users text-cyan"></i>
+                                <div>
+                                    <strong>500K+ Passengers</strong>
+                                    <span>High-scale consumer mobile</span>
+                                </div>
+                            </div>
+                            <div class="phil-badge">
+                                <i class="fa-solid fa-shield-halved text-emerald"></i>
+                                <div>
+                                    <strong>30% Crash Drop</strong>
+                                    <span>Deep profiling & stability</span>
+                                </div>
+                            </div>
+                            <div class="phil-badge">
+                                <i class="fa-solid fa-robot text-purple"></i>
+                                <div>
+                                    <strong>Live MCP Server</strong>
+                                    <span>Connecting ChatGPT to Ops</span>
+                                </div>
+                            </div>
+                            <div class="phil-badge">
+                                <i class="fa-solid fa-bolt text-amber"></i>
+                                <div>
+                                    <strong>0-to-1 Ownership</strong>
+                                    <span>Design &rarr; Code &rarr; Store</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Pillars -->
+                <div class="team-pillars-wrapper">
+                    <h3 class="subsection-title"><i class="fa-solid fa-cubes"></i> What I Bring to a Team</h3>
+                    <div class="team-pillars-grid">
+                        <div class="pillar-card tilt-card">
+                            <div class="pillar-icon">🛠️</div>
+                            <h4 class="pillar-title">0-to-1 Product Mindset</h4>
+                            <p class="pillar-desc">
+                                Comfortable owning the entire arc—from initial system design and backend APIs to polished mobile screens and bi-weekly production releases on Google Play and the App Store.
+                            </p>
+                            <div class="pillar-tags">
+                                <span class="pill-tag">System Design</span>
+                                <span class="pill-tag">Backend APIs</span>
+                                <span class="pill-tag">Mobile Polish</span>
+                            </div>
+                        </div>
+
+                        <div class="pillar-card tilt-card">
+                            <div class="pillar-icon">🤝</div>
+                            <h4 class="pillar-title">Team Multiplier</h4>
+                            <p class="pillar-desc">
+                                A collaborative builder who bridges product vision, backend microservice architecture, and mobile client constraints to unblock release velocity and prevent architectural regressions.
+                            </p>
+                            <div class="pillar-tags">
+                                <span class="pill-tag">Cross-Functional</span>
+                                <span class="pill-tag">API Contracts</span>
+                                <span class="pill-tag">Velocity</span>
+                            </div>
+                        </div>
+
+                        <div class="pillar-card tilt-card">
+                            <div class="pillar-icon">💡</div>
+                            <h4 class="pillar-title">Curiosity on the Edge</h4>
+                            <p class="pillar-desc">
+                                Hands-on with modern paradigms—from deep mobile memory profiling and crash elimination to Agentic AI and enterprise Model Context Protocol workflows.
+                            </p>
+                            <div class="pillar-tags">
+                                <span class="pill-tag">Mobile Profiling</span>
+                                <span class="pill-tag">Agentic AI</span>
+                                <span class="pill-tag">MCP Workflows</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Beyond The Screen (Outside of Code & Retro Music) -->
+                <div class="outside-code-wrapper">
+                    <h3 class="subsection-title"><i class="fa-solid fa-compass"></i> Beyond The Terminal & Screen</h3>
+                    <div class="outside-code-grid">
+                        <!-- Card 1: Books -->
+                        <div class="outside-card tilt-card">
+                            <div class="outside-card-top">
+                                <div class="outside-icon-badge amber">
+                                    <i class="fa-solid fa-book-open"></i>
+                                </div>
+                                <span class="outside-badge-label">2–3 Books / Month</span>
+                            </div>
+                            <h4>Slow & Steady Reader</h4>
+                            <p>
+                                Curious about distributed systems architecture, product psychology, biographies, and sci-fi. Constantly compounding knowledge beyond code.
+                            </p>
+                            <div class="book-spine-list">
+                                <span class="book-chip"><i class="fa-solid fa-bookmark"></i> System Design</span>
+                                <span class="book-chip"><i class="fa-solid fa-bookmark"></i> Deep Work</span>
+                                <span class="book-chip"><i class="fa-solid fa-bookmark"></i> AI & Agents</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Basketball -->
+                        <div class="outside-card tilt-card">
+                            <div class="outside-card-top">
+                                <div class="outside-icon-badge orange">
+                                    <i class="fa-solid fa-basketball"></i>
+                                </div>
+                                <span class="outside-badge-label">Active Hustle & Flow</span>
+                            </div>
+                            <h4>Pickup Basketball</h4>
+                            <p>
+                                An occasional pickup basketball enthusiast. Great code is like good ball movement—fast breaks, spacing, perimeter defense, and team trust.
+                            </p>
+                            <div class="hoop-callout">
+                                <i class="fa-solid fa-trophy"></i>
+                                <span>Fast Transitions &bull; Court Vision &bull; Team Hustle</span>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Retro Music & Equalizer -->
+                        <div class="outside-card tilt-card retro-music-card" onclick="toggleMusicVibe()" title="Click to play/pause retro lofi music synthesizer!">
+                            <div class="outside-card-top">
+                                <div class="outside-icon-badge purple">
+                                    <i class="fa-solid fa-music"></i>
+                                </div>
+                                <span class="outside-badge-label vibe-status" id="vibe-status-label">Now Grooving</span>
+                            </div>
+                            <h4>Retro Beats & Jazz</h4>
+                            <p>
+                                Recharging with classic Kishore Kumar melodies, golden 90s/2000s Bollywood tracks, or timeless old-school jazz while architecting clean UI flows.
+                            </p>
+
+                            <!-- Interactive Equalizer Bars -->
+                            <div class="retro-equalizer">
+                                <div class="eq-bar bar-1"></div>
+                                <div class="eq-bar bar-2"></div>
+                                <div class="eq-bar bar-3"></div>
+                                <div class="eq-bar bar-4"></div>
+                                <div class="eq-bar bar-5"></div>
+                                <div class="eq-bar bar-6"></div>
+                                <div class="eq-bar bar-7"></div>
+                                <div class="eq-bar bar-8"></div>
+                                <span class="eq-label"><i class="fa-solid fa-volume-high"></i> Click to Vibe</span>
+                            </div>
+
+                            <div class="book-spine-list" style="margin-top: 1rem;">
+                                <span class="book-chip" style="color: #c084fc; border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.08);">
+                                    <i class="fa-solid fa-compact-disc"></i> Kishore Kumar
+                                </span>
+                                <span class="book-chip" style="color: #c084fc; border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.08);">
+                                    <i class="fa-solid fa-record-vinyl"></i> 90s Bollywood
+                                </span>
+                                <span class="book-chip" style="color: #c084fc; border-color: rgba(139,92,246,0.3); background: rgba(139,92,246,0.08);">
+                                    <i class="fa-solid fa-guitar"></i> Old-School Jazz
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Core Mobile & Systems Stack Ribbon -->
+                <div class="core-stack-ribbon tilt-card">
+                    <div class="ribbon-header">
+                        <div>
+                            <span class="section-tag" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-layer-group"></i> Mobile & Full-Stack Tooling</span>
+                            <h3>Core Engineering Keywords</h3>
+                        </div>
+                        <span class="ribbon-action-note"><i class="fa-solid fa-lightbulb"></i> Click any keyword to search in Command Palette</span>
+                    </div>
+                    <div class="keyword-chips-cloud" id="about-keywords">
+                        <!-- Populated dynamically from data.js -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Experience Section -->
         <section class="section" id="experience">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">Career Journey</span>
-                    <h2 class="section-title">Work Experience</h2>
-                    <p class="section-subtitle">Delivering high-scale consumer aviation products, backend microservices, and AI integrations at Akasa Air.</p>
+                    <span class="section-tag"><i class="fa-solid fa-mobile-screen"></i> Production Impact</span>
+                    <h2 class="section-title">Work Experience & Mobile Engineering</h2>
+                    <p class="section-subtitle">Delivering high-scale consumer aviation mobile apps, resilient client-backend architectures, and AI integrations across 500,000+ passengers.</p>
                 </div>
 
                 <div class="timeline" id="experience-timeline">
@@ -191,10 +446,13 @@
         <section class="section mcp-section" id="mcp-playground">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag special-tag"><i class="fa-solid fa-brain"></i> ChatGPT &bull; Model Context Protocol</span>
+                    <span class="section-tag special-tag"><i class="fa-solid fa-brain"></i> ChatGPT &bull; Model Context
+                        Protocol</span>
                     <h2 class="section-title">Akasa Air on ChatGPT</h2>
                     <p class="section-subtitle">
-                        An enterprise Model Context Protocol (MCP) integration connecting OpenAI's <strong>ChatGPT</strong> directly to real-time <strong>Akasa Air</strong> operational flight tracking, passenger bookings, live fares, and web check-in.
+                        An enterprise Model Context Protocol (MCP) integration connecting OpenAI's
+                        <strong>ChatGPT</strong> directly to real-time <strong>Akasa Air</strong> operational flight
+                        tracking, passenger bookings, live fares, and web check-in.
                     </p>
                 </div>
 
@@ -217,7 +475,8 @@
                         </div>
 
                         <div class="chatgpt-header-action">
-                            <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" class="btn btn-primary chatgpt-open-btn">
+                            <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa"
+                                target="_blank" rel="noopener" class="btn btn-primary chatgpt-open-btn">
                                 <span>Try on ChatGPT</span>
                                 <i class="fa-solid fa-arrow-up-right-from-square"></i>
                             </a>
@@ -232,7 +491,8 @@
                                 <div class="chat-user-label">
                                     <i class="fa-solid fa-user"></i> You
                                 </div>
-                                <div class="chat-msg-text">What is the operational status and departure gate for Akasa Air flight QP 1366 from Mumbai to Bengaluru?</div>
+                                <div class="chat-msg-text">What is the operational status and departure gate for Akasa
+                                    Air flight QP 1366 from Mumbai to Bengaluru?</div>
                             </div>
 
                             <div class="chat-bubble assistant-bubble">
@@ -244,17 +504,21 @@
 
                                 <div class="tool-invocation-callout">
                                     <i class="fa-solid fa-bolt"></i>
-                                    <span>Executed Tool: <code class="tool-fn-name">check_flight_status_by_flight_number</code><span class="tool-fn-args">(flight_number: "QP 1366")</span></span>
+                                    <span>Executed Tool: <code
+                                            class="tool-fn-name">check_flight_status_by_flight_number</code><span
+                                            class="tool-fn-args">(flight_number: "QP 1366")</span></span>
                                 </div>
 
                                 <p style="margin-bottom: 1rem; font-size: 0.95rem;">
-                                    Here is the live operational status for <strong>Akasa Air Flight QP 1366</strong> on schedule today:
+                                    Here is the live operational status for <strong>Akasa Air Flight QP 1366</strong> on
+                                    schedule today:
                                 </p>
 
                                 <div class="airline-card">
                                     <div class="airline-card-top">
                                         <div class="flight-number-tag"><i class="fa-solid fa-plane"></i> QP 1366</div>
-                                        <span class="flight-status-badge on-time"><i class="fa-solid fa-circle-check"></i> On Schedule</span>
+                                        <span class="flight-status-badge on-time"><i
+                                                class="fa-solid fa-circle-check"></i> On Schedule</span>
                                     </div>
                                     <div class="flight-route-visual">
                                         <div class="route-stop left">
@@ -273,15 +537,29 @@
                                         </div>
                                     </div>
                                     <div class="flight-details-grid">
-                                        <div><div class="detail-item-val">Gate B4</div><div class="detail-item-lbl">Departure Gate</div></div>
-                                        <div><div class="detail-item-val">Boeing 737 MAX 8</div><div class="detail-item-lbl">Aircraft</div></div>
-                                        <div><div class="detail-item-val">Carousel 04</div><div class="detail-item-lbl">Baggage Claim</div></div>
-                                        <div><div class="detail-item-val" style="color: var(--accent-emerald);">Active</div><div class="detail-item-lbl">Café Akasa</div></div>
+                                        <div>
+                                            <div class="detail-item-val">Gate B4</div>
+                                            <div class="detail-item-lbl">Departure Gate</div>
+                                        </div>
+                                        <div>
+                                            <div class="detail-item-val">Boeing 737 MAX 8</div>
+                                            <div class="detail-item-lbl">Aircraft</div>
+                                        </div>
+                                        <div>
+                                            <div class="detail-item-val">Carousel 04</div>
+                                            <div class="detail-item-lbl">Baggage Claim</div>
+                                        </div>
+                                        <div>
+                                            <div class="detail-item-val" style="color: var(--accent-emerald);">Active
+                                            </div>
+                                            <div class="detail-item-lbl">Café Akasa</div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.92rem;">
-                                    Boarding is on schedule at <strong>Mumbai T1, Gate B4</strong>. Estimated arrival at Bengaluru is <strong>12:10 IST</strong>.
+                                    Boarding is on schedule at <strong>Mumbai T1, Gate B4</strong>. Estimated arrival at
+                                    Bengaluru is <strong>12:10 IST</strong>.
                                 </p>
                             </div>
 
@@ -290,7 +568,8 @@
                                 <div class="chat-user-label">
                                     <i class="fa-solid fa-user"></i> You
                                 </div>
-                                <div class="chat-msg-text">Can you look up my booking reference ABC123 and check my seat and web check-in eligibility?</div>
+                                <div class="chat-msg-text">Can you look up my booking reference ABC123 and check my seat
+                                    and web check-in eligibility?</div>
                             </div>
 
                             <div class="chat-bubble assistant-bubble">
@@ -302,7 +581,9 @@
 
                                 <div class="tool-invocation-callout">
                                     <i class="fa-solid fa-bolt"></i>
-                                    <span>Executed Tool: <code class="tool-fn-name">check_flight_status_by_record_locator</code><span class="tool-fn-args">(record_locator: "ABC123")</span></span>
+                                    <span>Executed Tool: <code
+                                            class="tool-fn-name">check_flight_status_by_record_locator</code><span
+                                            class="tool-fn-args">(record_locator: "ABC123")</span></span>
                                 </div>
 
                                 <p style="margin-bottom: 1rem; font-size: 0.95rem;">
@@ -319,15 +600,28 @@
                                         </span>
                                     </div>
                                     <div class="flight-details-grid">
-                                        <div><div class="detail-item-val">Hemani / Indresh Mr</div><div class="detail-item-lbl">Passenger</div></div>
-                                        <div><div class="detail-item-val">12A (Window Extra Legroom)</div><div class="detail-item-lbl">Seat</div></div>
-                                        <div><div class="detail-item-val">QP 1366 (BOM &rarr; BLR)</div><div class="detail-item-lbl">Flight</div></div>
-                                        <div><div class="detail-item-val text-accent">Eligible for Check-in</div><div class="detail-item-lbl">Web Check-in</div></div>
+                                        <div>
+                                            <div class="detail-item-val">Hemani / Indresh Mr</div>
+                                            <div class="detail-item-lbl">Passenger</div>
+                                        </div>
+                                        <div>
+                                            <div class="detail-item-val">12A (Window Extra Legroom)</div>
+                                            <div class="detail-item-lbl">Seat</div>
+                                        </div>
+                                        <div>
+                                            <div class="detail-item-val">QP 1366 (BOM &rarr; BLR)</div>
+                                            <div class="detail-item-lbl">Flight</div>
+                                        </div>
+                                        <div>
+                                            <div class="detail-item-val text-accent">Eligible for Check-in</div>
+                                            <div class="detail-item-lbl">Web Check-in</div>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.92rem;">
-                                    You are eligible for web check-in. You can complete check-in directly through Akasa Air's official portal.
+                                    You are eligible for web check-in. You can complete check-in directly through Akasa
+                                    Air's official portal.
                                 </p>
                             </div>
                         </div>
@@ -337,13 +631,16 @@
                     <div class="chatgpt-cta-footer">
                         <div>
                             <div class="chatgpt-cta-title">
-                                <i class="fa-solid fa-wand-magic-sparkles" style="color: #10a37f;"></i> Want to try it live?
+                                <i class="fa-solid fa-wand-magic-sparkles" style="color: #10a37f;"></i> Want to try it
+                                live?
                             </div>
                             <div class="chatgpt-cta-sub">
-                                Test flight lookups, real-time booking inquiries, and fare searches directly using the official Akasa Air ChatGPT extension.
+                                Test flight lookups, real-time booking inquiries, and fare searches directly using the
+                                official Akasa Air ChatGPT extension.
                             </div>
                         </div>
-                        <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" class="btn btn-primary chatgpt-cta-btn">
+                        <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa"
+                            target="_blank" rel="noopener" class="btn btn-primary chatgpt-cta-btn">
                             <i class="fa-solid fa-brain"></i>
                             <span>Open in ChatGPT</span>
                             <i class="fa-solid fa-arrow-right"></i>
@@ -357,17 +654,17 @@
         <section class="section" id="projects">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">Engineering Portfolio</span>
-                    <h2 class="section-title">Featured Projects</h2>
-                    <p class="section-subtitle">High-scale production systems, AI & Agentic integrations, and community applications I've developed.</p>
+                    <span class="section-tag"><i class="fa-solid fa-layer-group"></i> Mobile & Systems Engineering</span>
+                    <h2 class="section-title">Featured Projects & Mobile Apps</h2>
+                    <p class="section-subtitle">Production mobile applications, AI & MCP agentic tools, and full-stack systems built for performance, scale, and delightful UX.</p>
                 </div>
 
                 <!-- Category Filters -->
                 <div class="project-filters">
                     <button class="filter-btn active" data-filter="all">All Projects</button>
-                    <button class="filter-btn" data-filter="ai">AI, MCP & IoT</button>
-                    <button class="filter-btn" data-filter="mobile">Mobile & Cloud</button>
-                    <button class="filter-btn" data-filter="backend">Backend & APIs</button>
+                    <button class="filter-btn" data-filter="mobile"><i class="fa-solid fa-mobile-screen-button"></i> Mobile & Client Apps</button>
+                    <button class="filter-btn" data-filter="ai"><i class="fa-solid fa-brain"></i> AI, MCP & IoT</button>
+                    <button class="filter-btn" data-filter="backend"><i class="fa-solid fa-server"></i> Backend & APIs</button>
                 </div>
 
                 <div class="projects-grid" id="projects-container">
@@ -382,7 +679,8 @@
                 <div class="section-header">
                     <span class="section-tag"><i class="fa-solid fa-graduation-cap"></i> Academic Contributions</span>
                     <h2 class="section-title">Research & IEEE Publications</h2>
-                    <p class="section-subtitle">Peer-reviewed publications advancing distributed architectures, Internet of Things, and Artificial Intelligence.</p>
+                    <p class="section-subtitle">Peer-reviewed publications advancing distributed architectures, Internet
+                        of Things, and Artificial Intelligence.</p>
                 </div>
 
                 <div class="research-container" id="research-container">
@@ -395,9 +693,54 @@
         <section class="section" id="skills">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">Technical Stack</span>
+                    <span class="section-tag"><i class="fa-solid fa-code"></i> Engineering Architecture</span>
                     <h2 class="section-title">Skills & Technologies</h2>
-                    <p class="section-subtitle">Comprehensive technical skills spanning cross-platform mobile, microservices, cloud infrastructure, and Agentic AI.</p>
+                    <p class="section-subtitle">Deep expertise across modern mobile toolkits (Flutter, Jetpack Compose, Kotlin, Swift), cloud microservices, and Agentic AI.</p>
+                </div>
+
+                <!-- Mobile Engineering Vitals & Quality HUD -->
+                <div class="mobile-quality-hud tilt-card">
+                    <div class="hud-top-bar">
+                        <div class="hud-title-wrap">
+                            <div class="pulse-beacon-dot"></div>
+                            <span class="hud-title">Mobile Engineering Performance & Quality Benchmarks</span>
+                        </div>
+                        <span class="hud-status-badge"><i class="fa-solid fa-circle-check"></i> Production Validated</span>
+                    </div>
+                    <div class="hud-metrics-grid">
+                        <div class="hud-metric-box">
+                            <div class="hud-metric-header">
+                                <i class="fa-solid fa-gauge-high text-cyan"></i>
+                                <span class="hud-metric-tag">FPS Target</span>
+                            </div>
+                            <div class="hud-metric-val">60 / 120 <span class="unit">FPS</span></div>
+                            <div class="hud-metric-desc">Jank-free declarative rendering across Flutter & Jetpack Compose with zero UI thread drops on heavy feeds.</div>
+                        </div>
+                        <div class="hud-metric-box">
+                            <div class="hud-metric-header">
+                                <i class="fa-solid fa-shield-virus text-emerald"></i>
+                                <span class="hud-metric-tag">Stability Target</span>
+                            </div>
+                            <div class="hud-metric-val">99.8% <span class="unit">Crash-Free</span></div>
+                            <div class="hud-metric-desc">Proactive LeakCanary memory profiling & null safety, slashing crashes by 30% across 500K+ passengers.</div>
+                        </div>
+                        <div class="hud-metric-box">
+                            <div class="hud-metric-header">
+                                <i class="fa-solid fa-stopwatch text-amber"></i>
+                                <span class="hud-metric-tag">Cold Launch</span>
+                            </div>
+                            <div class="hud-metric-val">&lt; 850 <span class="unit">ms</span></div>
+                            <div class="hud-metric-desc">Optimized bytecodes, tree-shaken dependencies & lazy initialization for instant app readiness.</div>
+                        </div>
+                        <div class="hud-metric-box">
+                            <div class="hud-metric-header">
+                                <i class="fa-solid fa-satellite-dish text-purple"></i>
+                                <span class="hud-metric-tag">State & Cache</span>
+                            </div>
+                            <div class="hud-metric-val">Offline <span class="unit">Resilient</span></div>
+                            <div class="hud-metric-desc">Local caching (Room & Hive), reactive state flows (BLoC & StateFlow), and graceful reconnection retry loops.</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="skills-grid" id="skills-container">
@@ -412,7 +755,8 @@
                 <div class="section-header">
                     <span class="section-tag">Academic Background</span>
                     <h2 class="section-title">Education & Leadership</h2>
-                    <p class="section-subtitle">Academic foundations in Computer Applications, Artificial Intelligence, and University Student Council Leadership.</p>
+                    <p class="section-subtitle">Academic foundations in Computer Applications, Artificial Intelligence,
+                        and University Student Council Leadership.</p>
                 </div>
 
                 <div class="education-grid" id="education-container">
@@ -430,7 +774,8 @@
                     </div>
                     <h2 class="section-title">Let's Connect & Build</h2>
                     <p class="section-subtitle" style="margin-bottom: 2rem;">
-                        Interested in discussing high-scale mobile engineering, MCP Agentic AI systems, or full-stack opportunities? Reach out anytime!
+                        Interested in discussing high-scale mobile engineering, MCP Agentic AI systems, or full-stack
+                        opportunities? Reach out anytime!
                     </p>
 
                     <div class="contact-info-grid">
@@ -438,7 +783,8 @@
                             <i class="fa-solid fa-envelope"></i>
                             <h4>Email</h4>
                             <p id="contact-email-text">hemaniindresh@gmail.com</p>
-                            <button class="copy-btn" onclick="copyToClipboard('hemaniindresh@gmail.com', 'Email copied to clipboard!')">
+                            <button class="copy-btn"
+                                onclick="copyToClipboard('hemaniindresh@gmail.com', 'Email copied to clipboard!')">
                                 <i class="fa-regular fa-copy"></i> Copy Email
                             </button>
                         </div>
@@ -446,7 +792,8 @@
                             <i class="fa-solid fa-phone"></i>
                             <h4>Phone</h4>
                             <p id="contact-phone-text">+91-7424905531</p>
-                            <button class="copy-btn" onclick="copyToClipboard('+917424905531', 'Phone number copied to clipboard!')">
+                            <button class="copy-btn"
+                                onclick="copyToClipboard('+917424905531', 'Phone number copied to clipboard!')">
                                 <i class="fa-regular fa-copy"></i> Copy Phone
                             </button>
                         </div>
@@ -454,7 +801,8 @@
                             <i class="fa-solid fa-location-dot"></i>
                             <h4>Location</h4>
                             <p id="contact-location-text">Mumbai, India</p>
-                            <span class="pill-tag" style="display:inline-block; margin-top:0.6rem;">Senior Software Engineer @ Akasa Air</span>
+                            <span class="pill-tag" style="display:inline-block; margin-top:0.6rem;">Senior Software
+                                Engineer @ Akasa Air</span>
                         </div>
                     </div>
 
@@ -462,13 +810,15 @@
                         <a href="mailto:hemaniindresh@gmail.com" class="btn btn-primary">
                             <i class="fa-solid fa-envelope-open-text"></i> Send Direct Email
                         </a>
-                        <a href="https://linkedin.com/in/indresh-hemani" target="_blank" rel="noopener" class="btn btn-outline">
+                        <a href="https://linkedin.com/in/indresh-hemani" target="_blank" rel="noopener"
+                            class="btn btn-outline">
                             <i class="fa-brands fa-linkedin"></i> Connect on LinkedIn
                         </a>
                         <a href="https://github.com/Indresh10" target="_blank" rel="noopener" class="btn btn-outline">
                             <i class="fa-brands fa-github"></i> Visit GitHub (@Indresh10)
                         </a>
-                        <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" class="btn btn-chatgpt">
+                        <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa"
+                            target="_blank" rel="noopener" class="btn btn-chatgpt">
                             <i class="fa-solid fa-robot"></i> Try Akasa ChatGPT App
                         </a>
                     </div>
@@ -478,7 +828,8 @@
     </main>
 
     <!-- Floating Interactive Quick Action Button -->
-    <div class="floating-mcp-launcher" onclick="scrollToSection('mcp-playground')" title="Jump to Interactive Akasa MCP Playground">
+    <div class="floating-mcp-launcher" onclick="scrollToSection('mcp-playground')"
+        title="Jump to Interactive Akasa MCP Playground">
         <span class="pulse-ring"></span>
         <i class="fa-solid fa-robot"></i>
         <span class="fab-label">Test Akasa MCP</span>
@@ -489,7 +840,8 @@
         <div class="cmd-palette-window">
             <div class="cmd-palette-input-wrap">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="cmd-palette-input" placeholder="Type a command, project, or section to navigate..." autocomplete="off">
+                <input type="text" id="cmd-palette-input"
+                    placeholder="Type a command, project, or section to navigate..." autocomplete="off">
                 <span class="cmd-esc-tag">ESC</span>
             </div>
             <div class="cmd-palette-list" id="cmd-palette-list">
@@ -514,13 +866,16 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container footer-content">
-            <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Back to Top">
+            <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+                aria-label="Back to Top">
                 <i class="fa-solid fa-arrow-up"></i>
             </button>
             <p>&copy; 2026 Indresh Hemani &bull; Software Engineer @ Akasa Air & AI Researcher</p>
             <p style="font-size: 0.8rem; color: var(--text-muted);">
-                Powered by Three.js & Model Context Protocol &bull; 
-                <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa" target="_blank" rel="noopener" style="color: var(--accent-cyan);">Akasa ChatGPT Plugin (App ID: plugin_asdk_app)</a>
+                Powered by Three.js & Model Context Protocol &bull;
+                <a href="https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa"
+                    target="_blank" rel="noopener" style="color: var(--accent-cyan);">Akasa ChatGPT Plugin (App ID:
+                    plugin_asdk_app)</a>
             </p>
         </div>
     </footer>
@@ -533,4 +888,5 @@
     <script src="js/scene3d.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>

@@ -91,7 +91,24 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
+    // --- 3B. Render About Keywords Cloud ---
+    const keywordsContainer = document.getElementById('about-keywords');
+    if (keywordsContainer && portfolioData.about && portfolioData.about.coreKeywords) {
+        keywordsContainer.innerHTML = portfolioData.about.coreKeywords.map(k => {
+            let catClass = 'mobile';
+            if (k.cat === 'Architecture') catClass = 'arch';
+            else if (k.cat === 'Backend') catClass = 'backend';
+            else if (k.cat === 'Performance') catClass = 'perf';
+            else if (k.cat === 'AI') catClass = 'ai';
+
+            return `<span class="keyword-chip ${catClass}" onclick="openCommandPaletteWithQuery('${k.name}')">
+                <i class="fa-solid fa-tag"></i> ${k.name}
+            </span>`;
+        }).join('');
+    }
+
     // --- 4. Render Experience Timeline ---
+    // --- 4. Render Experience Timeline with Mobile Scope & Metrics ---
     const timelineContainer = document.getElementById('experience-timeline');
     if (timelineContainer && experience) {
         timelineContainer.innerHTML = experience.map(exp => `
@@ -108,6 +125,37 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <span class="timeline-period">${exp.period}</span>
                     </div>
+
+                    ${exp.mobileBadge ? `
+                        <div class="timeline-mobile-banner">
+                            <div class="mobile-scope-title">
+                                <i class="fa-solid fa-mobile-screen-button"></i>
+                                <span>${exp.mobileBadge}</span>
+                            </div>
+                            ${exp.platformStores ? `
+                                <div class="store-badge-group">
+                                    ${exp.platformStores.map(store => `
+                                        <span class="store-badge-pill">
+                                            <i class="${store.includes('Google') ? 'fa-brands fa-google-play' : store.includes('Apple') ? 'fa-brands fa-apple' : store.includes('Staff') ? 'fa-solid fa-ticket' : 'fa-brands fa-android'}"></i>
+                                            ${store}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+
+                    ${exp.mobileMetrics ? `
+                        <div class="timeline-metrics-strip">
+                            ${exp.mobileMetrics.map(m => `
+                                <div class="mini-metric-chip">
+                                    <i class="${m.icon}"></i>
+                                    <span>${m.label}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+
                     <ul class="timeline-bullets">
                         ${exp.highlights.map(h => `<li>${h}</li>`).join('')}
                     </ul>
@@ -119,14 +167,19 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // --- 5. Render Skills Matrix ---
+    // --- 5. Render Skills Matrix with Mobile Flagship Card ---
     const skillsContainer = document.getElementById('skills-container');
     if (skillsContainer && skillCategories) {
-        skillsContainer.innerHTML = skillCategories.map(cat => `
-            <div class="tilt-card skill-category-card">
+        skillsContainer.innerHTML = skillCategories.map(cat => {
+            const isMobileCat = cat.category === "Mobile Engineering";
+            return `
+            <div class="tilt-card skill-category-card ${isMobileCat ? 'mobile-flagship-card' : ''}">
                 <div class="skill-card-head">
-                    <i class="${cat.icon}"></i>
-                    <h3>${cat.category}</h3>
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="${cat.icon}"></i>
+                        <h3>${cat.category}</h3>
+                    </div>
+                    ${isMobileCat ? `<span class="flagship-badge"><i class="fa-solid fa-crown"></i> Flagship Domain</span>` : ''}
                 </div>
                 <div class="skill-items">
                     ${cat.skills.map(sk => `
@@ -137,26 +190,38 @@ document.addEventListener('DOMContentLoaded', () => {
                     `).join('')}
                 </div>
             </div>
-        `).join('');
+        `}).join('');
     }
 
-    // --- 6. Render Projects with Category Filtering ---
+    // --- 6. Render Projects with Category Filtering, Store Badges & Metrics ---
     const projectsContainer = document.getElementById('projects-container');
     const filterBtns = document.querySelectorAll('.filter-btn');
 
     function renderProjects(filter = 'all') {
         if (!projectsContainer || !projects) return;
 
-        const filtered = filter === 'all' 
-            ? projects 
+        const filtered = filter === 'all'
+            ? projects
             : projects.filter(p => p.category === filter);
 
         projectsContainer.innerHTML = filtered.map(proj => `
-            <div class="tilt-card project-card" data-category="${proj.category}" onclick="openProjectModal('${proj.id}')">
+            <div class="tilt-card project-card ${proj.category === 'mobile' ? 'mobile-project-card' : ''}" data-category="${proj.category}" onclick="openProjectModal('${proj.id}')">
                 <div>
                     <div class="project-header">
-                        <div class="project-icon-box">
-                            <i class="${proj.icon}"></i>
+                        <div class="project-header-left">
+                            <div class="project-icon-box">
+                                <i class="${proj.icon}"></i>
+                            </div>
+                            ${proj.storeBadges ? `
+                                <div class="project-store-badges">
+                                    ${proj.storeBadges.map(st => `
+                                        <span class="project-store-badge">
+                                            <i class="${st.includes('Google') || st.includes('Play') ? 'fa-brands fa-google-play' : st.includes('Apple') ? 'fa-brands fa-apple' : st.includes('Android') ? 'fa-brands fa-android' : st.includes('Compose') ? 'fa-solid fa-shapes' : st.includes('Maps') ? 'fa-solid fa-map-location-dot' : 'fa-solid fa-bolt'}"></i>
+                                            ${st}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
                         </div>
                         <div class="project-links" onclick="event.stopPropagation()">
                             ${proj.links.chatgpt ? `<a href="${proj.links.chatgpt}" target="_blank" rel="noopener" title="Open Akasa ChatGPT App"><i class="fa-solid fa-robot"></i></a>` : ''}
@@ -167,6 +232,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3 class="project-title">${proj.title}</h3>
                     <p class="project-tagline">${proj.tagline}</p>
                     <p class="project-desc">${proj.description}</p>
+
+                    ${proj.stats ? `
+                        <div class="project-stats-strip">
+                            ${proj.stats.map(s => `
+                                <div class="project-stat-pill">
+                                    <span class="stat-p-lbl">${s.label}:</span>
+                                    <span class="stat-p-val">${s.value}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+
                     <ul class="project-highlights-list">
                         ${proj.highlights.slice(0, 3).map(hl => `<li>${hl}</li>`).join('')}
                     </ul>
@@ -236,6 +313,33 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
+    // --- 8b. Render Core Stack & Keywords Cloud ---
+    const keywordContainer = document.getElementById('keyword-chips-container');
+    if (keywordContainer && portfolioData.about && portfolioData.about.coreKeywords) {
+        function getKeywordIcon(name) {
+            if (name.includes('Flutter')) return 'devicon-flutter-plain';
+            if (name.includes('Android') || name.includes('Kotlin')) return 'devicon-android-plain';
+            if (name.includes('Compose')) return 'fa-solid fa-shapes';
+            if (name.includes('Swift') || name.includes('iOS')) return 'devicon-swift-plain';
+            if (name.includes('Java')) return 'fa-brands fa-java';
+            if (name.includes('Architecture')) return 'fa-solid fa-layer-group';
+            if (name.includes('State')) return 'fa-solid fa-arrows-spin';
+            if (name.includes('GraphQL') || name.includes('REST')) return 'fa-solid fa-network-wired';
+            if (name.includes('System')) return 'fa-solid fa-diagram-project';
+            if (name.includes('MCP') || name.includes('Protocol')) return 'fa-solid fa-robot';
+            if (name.includes('Crash')) return 'fa-solid fa-shield-halved';
+            if (name.includes('Coroutines')) return 'fa-solid fa-water';
+            if (name.includes('LeakCanary')) return 'fa-solid fa-bug-slash';
+            return 'fa-solid fa-bolt';
+        }
+
+        keywordContainer.innerHTML = portfolioData.about.coreKeywords.map(k => `
+            <span class="keyword-chip ${k.cat.toLowerCase()}" onclick="copyToClipboard('${k.name}', 'Keyword copied!')">
+                <i class="${getKeywordIcon(k.name)}"></i> ${k.name}
+            </span>
+        `).join('');
+    }
+
     // --- 9. Render Contact Section Details ---
     const contactEmailEl = document.getElementById('contact-email-text');
     const contactPhoneEl = document.getElementById('contact-phone-text');
@@ -267,8 +371,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('portfolio-theme', theme);
         if (themeToggleBtn) {
-            themeToggleBtn.innerHTML = theme === 'light' 
-                ? '<i class="fa-solid fa-moon"></i>' 
+            themeToggleBtn.innerHTML = theme === 'light'
+                ? '<i class="fa-solid fa-moon"></i>'
                 : '<i class="fa-solid fa-sun"></i>';
         }
     }
@@ -331,7 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // 3D Card Tilt & Dynamic Glare Effect
 // ==========================================================================
 function initTiltPhysics() {
-    const tiltCards = document.querySelectorAll('.tilt-card, .hero-3d-card, .mcp-console-wrapper');
+    const tiltCards = document.querySelectorAll('.tilt-card, .hero-3d-card, .mcp-console-wrapper, .phone-device-card, .pillar-card, .outside-card, .about-story-card, .about-philosophy-card');
 
     tiltCards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
@@ -355,6 +459,210 @@ function initTiltPhysics() {
         });
     });
 }
+
+// ==========================================================================
+// Interactive Smartphone Mockup Controls
+// ==========================================================================
+window.switchPhoneScreen = function (screenId) {
+    const screens = {
+        flight: document.getElementById('phone-screen-flight'),
+        arch: document.getElementById('phone-screen-arch'),
+        vitals: document.getElementById('phone-screen-vitals')
+    };
+
+    const tabBtns = {
+        flight: document.getElementById('tab-btn-flight'),
+        arch: document.getElementById('tab-btn-arch'),
+        vitals: document.getElementById('tab-btn-vitals')
+    };
+
+    Object.keys(screens).forEach(key => {
+        if (screens[key]) {
+            if (key === screenId) {
+                screens[key].classList.add('active');
+            } else {
+                screens[key].classList.remove('active');
+            }
+        }
+        if (tabBtns[key]) {
+            if (key === screenId) {
+                tabBtns[key].classList.add('active');
+            } else {
+                tabBtns[key].classList.remove('active');
+            }
+        }
+    });
+
+    const islandText = document.getElementById('island-text-content');
+    if (islandText) {
+        if (screenId === 'flight') islandText.innerHTML = 'QP 1366 &bull; Gate B4 &bull; On Schedule';
+        else if (screenId === 'arch') islandText.innerHTML = 'Client ↔ Contract ↔ Cloud';
+        else if (screenId === 'vitals') islandText.innerHTML = '500K+ Users &bull; -30% Crashes';
+    }
+};
+
+let islandNotificationIdx = 0;
+const ISLAND_NOTIFICATIONS = [
+    { icon: 'fa-solid fa-plane-up', text: 'QP 1366 &bull; Gate B4 &bull; Boarding Now' },
+    { icon: 'fa-solid fa-shield-halved', text: 'Production Stability: 99.8% Crash-Free' },
+    { icon: 'fa-solid fa-robot', text: 'Akasa MCP Server: 6 Tools Active' },
+    { icon: 'fa-solid fa-bolt', text: 'Sub-100ms API Latency Verified' },
+    { icon: 'fa-brands fa-flutter', text: 'Fluid 120 FPS Declarative Rendering' }
+];
+
+window.triggerIslandNotification = function () {
+    const island = document.getElementById('dynamic-island');
+    const islandText = document.getElementById('island-text-content');
+    if (!island || !islandText) return;
+
+    islandNotificationIdx = (islandNotificationIdx + 1) % ISLAND_NOTIFICATIONS.length;
+    const currentNotif = ISLAND_NOTIFICATIONS[islandNotificationIdx];
+
+    island.classList.add('island-alert');
+    islandText.innerHTML = currentNotif.text;
+    const iconEl = island.querySelector('.island-icon i');
+    if (iconEl) iconEl.className = currentNotif.icon;
+
+    showToast(`📱 Mobile Alert: ${currentNotif.text.replace(/&bull;/g, '•')}`);
+
+    setTimeout(() => {
+        island.classList.remove('island-alert');
+    }, 600);
+};
+
+// ==========================================================================
+// Retro Music & Equalizer Vibe Control (Web Audio API Chillhop / Jazz Synth)
+// ==========================================================================
+let isMusicVibePlaying = false;
+let audioCtx = null;
+let chordInterval = null;
+let masterGain = null;
+
+// Warm jazz lo-fi chord progressions (frequencies in Hz)
+// Ebmaj7, Gm7, Fm7, Bb7 (Kishore Kumar & vintage jazz progression)
+const jazzChords = [
+    [155.56, 196.00, 233.08, 293.66], // Ebmaj7
+    [196.00, 233.08, 293.66, 349.23], // Gm7
+    [174.61, 207.65, 261.63, 311.13], // Fm7
+    [116.54, 174.61, 233.08, 277.18]  // Bb7
+];
+let currentChordIdx = 0;
+
+function playJazzChord() {
+    if (!audioCtx || !isMusicVibePlaying) return;
+
+    const chord = jazzChords[currentChordIdx % jazzChords.length];
+    currentChordIdx++;
+
+    const now = audioCtx.currentTime;
+    const chordDuration = 3.6; // Soft lingering chord
+
+    chord.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
+
+        // Warm sine and triangle hybrid for Rhodes piano / vintage synth feel
+        osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+
+        // Warm vintage lowpass filter (cuts harsh highs)
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(450 + idx * 80, now);
+
+        // Soft ADSR envelope
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.045, now + 0.6); // Gentle attack
+        gain.gain.exponentialRampToValueAtTime(0.001, now + chordDuration); // Smooth decay
+
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(masterGain);
+
+        osc.start(now);
+        osc.stop(now + chordDuration);
+    });
+}
+
+function startVibeAudio() {
+    try {
+        if (!audioCtx) {
+            const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            audioCtx = new AudioContextClass();
+            masterGain = audioCtx.createGain();
+            masterGain.gain.setValueAtTime(0.7, audioCtx.currentTime);
+            masterGain.connect(audioCtx.destination);
+        }
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
+        }
+
+        playJazzChord();
+        if (chordInterval) clearInterval(chordInterval);
+        chordInterval = setInterval(() => {
+            if (isMusicVibePlaying) playJazzChord();
+        }, 3400);
+    } catch (e) {
+        console.warn('Web Audio could not start:', e);
+    }
+}
+
+function stopVibeAudio() {
+    if (chordInterval) {
+        clearInterval(chordInterval);
+        chordInterval = null;
+    }
+    if (audioCtx && audioCtx.state === 'running') {
+        audioCtx.suspend();
+    }
+}
+
+window.toggleMusicVibe = function () {
+    const eq = document.querySelector('.retro-equalizer');
+    const label = document.getElementById('vibe-status-label');
+    const navBtn = document.getElementById('vibe-nav-btn');
+
+    isMusicVibePlaying = !isMusicVibePlaying;
+
+    if (isMusicVibePlaying) {
+        if (eq) eq.classList.remove('paused');
+        if (label) {
+            label.textContent = 'Now Grooving 🎶';
+            label.classList.add('vibe-status');
+        }
+        if (navBtn) {
+            navBtn.classList.add('playing');
+            const pillText = navBtn.querySelector('.vibe-pill-text');
+            if (pillText) pillText.textContent = 'Grooving 🎶';
+        }
+        startVibeAudio();
+        showToast('🎶 Retro Vibe Active: Old-School Jazz Synth playing!');
+    } else {
+        if (eq) eq.classList.add('paused');
+        if (label) {
+            label.textContent = 'Vibe Paused';
+            label.classList.remove('vibe-status');
+        }
+        if (navBtn) {
+            navBtn.classList.remove('playing');
+            const pillText = navBtn.querySelector('.vibe-pill-text');
+            if (pillText) pillText.textContent = 'Chill Vibe';
+        }
+        stopVibeAudio();
+        showToast('⏸️ Equalizer paused. Tap again to groove!');
+    }
+};
+
+window.openCommandPaletteWithQuery = function (query) {
+    if (typeof openCommandPalette === 'function') {
+        openCommandPalette();
+        const input = document.getElementById('cmd-palette-input');
+        if (input) {
+            input.value = query;
+            input.dispatchEvent(new Event('input'));
+        }
+    }
+};
 
 // ==========================================================================
 // Interactive Project Deep-Dive Modal Inspector
@@ -450,6 +758,10 @@ window.closeProjectModal = function () {
 // Command Palette (Ctrl+K / Cmd+K)
 // ==========================================================================
 const COMMAND_ITEMS = [
+    { title: "About Me & Mobile Craftsmanship", desc: "Java/XML roots, engineering philosophy & pillars", cat: "About", action: () => { closeCommandPalette(); scrollToSection('about'); } },
+    { title: "Mobile Phone: Boarding Pass Screen", desc: "Interactive Akasa Air mobile pass on device", cat: "Mobile", action: () => { closeCommandPalette(); switchPhoneScreen('flight'); scrollToSection('hero'); } },
+    { title: "Mobile Phone: Architecture Flow", desc: "Client-server contracts & microservice diagram", cat: "Mobile", action: () => { closeCommandPalette(); switchPhoneScreen('arch'); scrollToSection('hero'); } },
+    { title: "Mobile Phone: Production Vitals", desc: "500K+ active users & 30% crash drop stats", cat: "Mobile", action: () => { closeCommandPalette(); switchPhoneScreen('vitals'); scrollToSection('hero'); } },
     { title: "Akasa Air on ChatGPT (MCP)", desc: "Showcase of Model Context Protocol integration", cat: "Feature", action: () => { closeCommandPalette(); scrollToSection('mcp-playground'); } },
     { title: "Open Akasa Air in ChatGPT", desc: "Try the live ChatGPT extension", cat: "ChatGPT App", action: () => { window.open('https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa', '_blank'); closeCommandPalette(); } },
     { title: "Akasa Air Mobile App", desc: "Production airline application for 500k+ passengers", cat: "Project", action: () => { closeCommandPalette(); openProjectModal('akasa-mobile'); } },
@@ -472,8 +784,8 @@ function initCommandPalette() {
 
     function renderList(query = '') {
         const q = query.toLowerCase().trim();
-        const filtered = COMMAND_ITEMS.filter(item => 
-            item.title.toLowerCase().includes(q) || 
+        const filtered = COMMAND_ITEMS.filter(item =>
+            item.title.toLowerCase().includes(q) ||
             item.desc.toLowerCase().includes(q) ||
             item.cat.toLowerCase().includes(q)
         );
