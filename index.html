@@ -91,6 +91,105 @@
         </div>
     </header>
 
+    <!-- iPhone Duo / iPad Style Side Menu Backdrop -->
+    <div class="side-drawer-backdrop" id="side-drawer-backdrop" onclick="closeSideDrawer()"></div>
+
+    <!-- iPhone Duo Style Side Navigation Drawer (Tablet & Mobile) -->
+    <aside class="side-drawer" id="side-drawer" aria-label="Mobile & Tablet Navigation">
+        <div class="side-drawer-header">
+            <div class="side-drawer-profile">
+                <span class="logo-badge">IH</span>
+                <div>
+                    <h4 class="side-drawer-name">Indresh Hemani</h4>
+                    <p class="side-drawer-role">Senior Systems Engineer &bull; Akasa Air</p>
+                </div>
+            </div>
+            <button class="side-drawer-close" onclick="closeSideDrawer()" aria-label="Close Side Menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="side-drawer-body">
+            <!-- iOS Duo Style Navigation Group -->
+            <div class="duo-menu-group">
+                <span class="duo-group-label">Navigation</span>
+                <nav class="duo-nav-list">
+                    <a href="#about" class="duo-nav-item" onclick="closeSideDrawer()">
+                        <div class="duo-icon cyan"><i class="fa-solid fa-compass"></i></div>
+                        <span class="duo-item-title">About & Mobile Craft</span>
+                        <i class="fa-solid fa-chevron-right duo-arrow"></i>
+                    </a>
+                    <a href="#experience" class="duo-nav-item" onclick="closeSideDrawer()">
+                        <div class="duo-icon blue"><i class="fa-solid fa-briefcase"></i></div>
+                        <span class="duo-item-title">Work Experience</span>
+                        <i class="fa-solid fa-chevron-right duo-arrow"></i>
+                    </a>
+                    <a href="#mcp-playground" class="duo-nav-item duo-highlight" onclick="closeSideDrawer()">
+                        <div class="duo-icon purple"><i class="fa-solid fa-robot"></i></div>
+                        <span class="duo-item-title">Akasa Air on ChatGPT</span>
+                        <span class="duo-chip">MCP</span>
+                    </a>
+                    <a href="#projects" class="duo-nav-item" onclick="closeSideDrawer()">
+                        <div class="duo-icon emerald"><i class="fa-solid fa-layer-group"></i></div>
+                        <span class="duo-item-title">Featured Projects</span>
+                        <i class="fa-solid fa-chevron-right duo-arrow"></i>
+                    </a>
+                    <a href="#research" class="duo-nav-item" onclick="closeSideDrawer()">
+                        <div class="duo-icon amber"><i class="fa-solid fa-file-lines"></i></div>
+                        <span class="duo-item-title">Research & IEEE</span>
+                        <i class="fa-solid fa-chevron-right duo-arrow"></i>
+                    </a>
+                    <a href="#skills" class="duo-nav-item" onclick="closeSideDrawer()">
+                        <div class="duo-icon rose"><i class="fa-solid fa-gauge-high"></i></div>
+                        <span class="duo-item-title">Skills & Quality HUD</span>
+                        <i class="fa-solid fa-chevron-right duo-arrow"></i>
+                    </a>
+                    <a href="#education" class="duo-nav-item" onclick="closeSideDrawer()">
+                        <div class="duo-icon sky"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <span class="duo-item-title">Education</span>
+                        <i class="fa-solid fa-chevron-right duo-arrow"></i>
+                    </a>
+                    <a href="#contact" class="duo-nav-item" onclick="closeSideDrawer()">
+                        <div class="duo-icon emerald"><i class="fa-regular fa-paper-plane"></i></div>
+                        <span class="duo-item-title">Let's Connect</span>
+                        <i class="fa-solid fa-chevron-right duo-arrow"></i>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Duo Mini Player / Retro Vibe Card -->
+            <div class="duo-vibe-card" onclick="toggleMusicVibe()">
+                <div class="duo-vibe-header">
+                    <div style="display: flex; align-items: center; gap: 0.6rem;">
+                        <i class="fa-solid fa-music text-purple"></i>
+                        <span class="duo-vibe-title">Retro Beats & Jazz</span>
+                    </div>
+                    <span class="side-vibe-badge" id="side-vibe-badge">Tap to Groove</span>
+                </div>
+                <div class="duo-eq-mini">
+                    <span class="deq-bar deq-1"></span>
+                    <span class="deq-bar deq-2"></span>
+                    <span class="deq-bar deq-3"></span>
+                    <span class="deq-bar deq-4"></span>
+                    <span class="deq-bar deq-5"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-drawer-footer">
+            <button class="duo-cmd-trigger" onclick="closeSideDrawer(); openCommandPalette();">
+                <i class="fa-solid fa-terminal"></i>
+                <span>Command Palette</span>
+                <span class="cmd-shortcut-badge"><kbd>Ctrl</kbd>+<kbd>K</kbd></span>
+            </button>
+            <div class="duo-socials">
+                <a href="https://github.com/Indresh10" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+                <a href="https://linkedin.com/in/indresh-hemani" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="mailto:hemaniindresh@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </aside>
+
     <main>
         <!-- Hero Section -->
         <section class="hero-section" id="hero">
@@ -826,6 +925,19 @@
             </div>
         </section>
     </main>
+
+    <!-- Floating Vibe Music FAB (Especially for Mobile & Quick Access) -->
+    <div class="floating-vibe-fab" id="floating-vibe-fab" onclick="toggleMusicVibe()"
+        title="Retro Beats & Jazz Vibe Player">
+        <span class="vibe-fab-pulse"></span>
+        <div class="vibe-fab-icon-wrap">
+            <i class="fa-solid fa-music"></i>
+            <div class="vibe-fab-eq">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <span class="vibe-fab-label" id="vibe-fab-label">Vibe</span>
+    </div>
 
     <!-- Floating Interactive Quick Action Button -->
     <div class="floating-mcp-launcher" onclick="scrollToSection('mcp-playground')"

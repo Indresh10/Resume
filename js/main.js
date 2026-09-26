@@ -387,21 +387,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 14. Mobile Hamburger Drawer ---
+    // --- 14. Mobile & Tablet iPhone Duo Side Drawer ---
     const hamburgerBtn = document.getElementById('hamburger-btn');
-    const navLinks = document.getElementById('nav-links');
+    const sideDrawer = document.getElementById('side-drawer');
+    const sideDrawerBackdrop = document.getElementById('side-drawer-backdrop');
 
-    if (hamburgerBtn && navLinks) {
-        hamburgerBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('mobile-open');
-            const isOpen = navLinks.classList.contains('mobile-open');
-            hamburgerBtn.innerHTML = isOpen ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+    window.openSideDrawer = function () {
+        if (sideDrawer) sideDrawer.classList.add('open');
+        if (sideDrawerBackdrop) sideDrawerBackdrop.classList.add('open');
+        if (hamburgerBtn) hamburgerBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeSideDrawer = function () {
+        if (sideDrawer) sideDrawer.classList.remove('open');
+        if (sideDrawerBackdrop) sideDrawerBackdrop.classList.remove('open');
+        if (hamburgerBtn) hamburgerBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        document.body.style.overflow = '';
+    };
+
+    window.toggleSideDrawer = function () {
+        if (sideDrawer && sideDrawer.classList.contains('open')) {
+            window.closeSideDrawer();
+        } else {
+            window.openSideDrawer();
+        }
+    };
+
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            window.toggleSideDrawer();
         });
+    }
 
-        navLinks.querySelectorAll('a').forEach(link => {
+    if (sideDrawerBackdrop) {
+        sideDrawerBackdrop.addEventListener('click', () => {
+            window.closeSideDrawer();
+        });
+    }
+
+    // Close side drawer on Escape key
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sideDrawer && sideDrawer.classList.contains('open')) {
+            window.closeSideDrawer();
+        }
+    });
+
+    // Close side drawer when any navigation link inside it is clicked
+    if (sideDrawer) {
+        sideDrawer.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                navLinks.classList.remove('mobile-open');
-                hamburgerBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+                window.closeSideDrawer();
             });
         });
     }
@@ -621,6 +658,10 @@ window.toggleMusicVibe = function () {
     const eq = document.querySelector('.retro-equalizer');
     const label = document.getElementById('vibe-status-label');
     const navBtn = document.getElementById('vibe-nav-btn');
+    const fabBtn = document.getElementById('floating-vibe-fab');
+    const fabLabel = document.getElementById('vibe-fab-label');
+    const sideCard = document.querySelector('.duo-vibe-card');
+    const sideBadge = document.getElementById('side-vibe-badge');
 
     isMusicVibePlaying = !isMusicVibePlaying;
 
@@ -635,6 +676,18 @@ window.toggleMusicVibe = function () {
             const pillText = navBtn.querySelector('.vibe-pill-text');
             if (pillText) pillText.textContent = 'Grooving 🎶';
         }
+        if (fabBtn) {
+            fabBtn.classList.add('playing');
+        }
+        if (fabLabel) {
+            fabLabel.textContent = 'Grooving';
+        }
+        if (sideCard) {
+            sideCard.classList.add('playing');
+        }
+        if (sideBadge) {
+            sideBadge.textContent = 'Grooving 🎶';
+        }
         startVibeAudio();
         showToast('🎶 Retro Vibe Active: Old-School Jazz Synth playing!');
     } else {
@@ -647,6 +700,18 @@ window.toggleMusicVibe = function () {
             navBtn.classList.remove('playing');
             const pillText = navBtn.querySelector('.vibe-pill-text');
             if (pillText) pillText.textContent = 'Chill Vibe';
+        }
+        if (fabBtn) {
+            fabBtn.classList.remove('playing');
+        }
+        if (fabLabel) {
+            fabLabel.textContent = 'Vibe';
+        }
+        if (sideCard) {
+            sideCard.classList.remove('playing');
+        }
+        if (sideBadge) {
+            sideBadge.textContent = 'Tap to Groove';
         }
         stopVibeAudio();
         showToast('⏸️ Equalizer paused. Tap again to groove!');
