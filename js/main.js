@@ -91,20 +91,85 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // --- 3B. Render About Keywords Cloud ---
+    // --- 3B. Render Celestial Comet Keywords Streams (Alternating Directions) ---
     const keywordsContainer = document.getElementById('about-keywords');
     if (keywordsContainer && portfolioData.about && portfolioData.about.coreKeywords) {
-        keywordsContainer.innerHTML = portfolioData.about.coreKeywords.map(k => {
-            let catClass = 'mobile';
-            if (k.cat === 'Architecture') catClass = 'arch';
-            else if (k.cat === 'Backend') catClass = 'backend';
-            else if (k.cat === 'Performance') catClass = 'perf';
-            else if (k.cat === 'AI') catClass = 'ai';
+        const keywords = portfolioData.about.coreKeywords;
 
-            return `<span class="keyword-chip ${catClass}" onclick="openCommandPaletteWithQuery('${k.name}')">
-                <i class="fa-solid fa-tag"></i> ${k.name}
-            </span>`;
-        }).join('');
+        // Split into 3 alternating rows
+        const row1 = keywords.filter((_, i) => i % 3 === 0);
+        const row2 = keywords.filter((_, i) => i % 3 === 1);
+        const row3 = keywords.filter((_, i) => i % 3 === 2);
+
+        function buildCometItem(k, direction) {
+            let catClass = 'mobile';
+            let icon = 'fa-brands fa-flutter';
+            if (k.cat === 'Architecture') { catClass = 'arch'; icon = 'fa-solid fa-layer-group'; }
+            else if (k.cat === 'Backend') { catClass = 'backend'; icon = 'fa-solid fa-server'; }
+            else if (k.cat === 'Performance') { catClass = 'perf'; icon = 'fa-solid fa-gauge-high'; }
+            else if (k.cat === 'AI') { catClass = 'ai'; icon = 'fa-solid fa-brain'; }
+
+            const name = k.name.toLowerCase();
+            if (name.includes('java') || name.includes('xml')) icon = 'fa-brands fa-java';
+            else if (name.includes('android tv') || name.includes('tv')) icon = 'fa-solid fa-tv';
+            else if (name.includes('android')) icon = 'fa-brands fa-android';
+            else if (name.includes('swift') || name.includes('ios')) icon = 'fa-brands fa-apple';
+            else if (name.includes('dart')) icon = 'fa-solid fa-cube';
+            else if (name.includes('websocket')) icon = 'fa-solid fa-bolt';
+            else if (name.includes('lan') || name.includes('peer-to-peer')) icon = 'fa-solid fa-circle-nodes';
+            else if (name.includes('p2p') || name.includes('mdns')) icon = 'fa-solid fa-network-wired';
+            else if (name.includes('desktop')) icon = 'fa-solid fa-desktop';
+            else if (name.includes('rest') || name.includes('graphql')) icon = 'fa-solid fa-arrows-split-up-and-left';
+            else if (name.includes('fastlane') || name.includes('ci/cd')) icon = 'fa-solid fa-rocket';
+            else if (name.includes('compose')) icon = 'fa-solid fa-shapes';
+            else if (name.includes('leakcanary') || name.includes('profiling')) icon = 'fa-solid fa-magnifying-glass-chart';
+            else if (name.includes('crash')) icon = 'fa-solid fa-shield-halved';
+            else if (name.includes('clean architecture') || name.includes('mvvm')) icon = 'fa-solid fa-cubes';
+            else if (name.includes('state')) icon = 'fa-solid fa-arrows-spin';
+            else if (name.includes('system design')) icon = 'fa-solid fa-diagram-project';
+            else if (name.includes('offline')) icon = 'fa-solid fa-cloud-arrow-down';
+            else if (name.includes('coroutines') || name.includes('flow')) icon = 'fa-solid fa-water';
+            else if (name.includes('ai') || name.includes('mcp') || name.includes('agent')) icon = 'fa-solid fa-brain';
+
+            return `
+                <div class="comet-chip comet-${direction} ${catClass}" onclick="openKeywordProjectsModal('${k.name}')" title="Explore projects with ${k.name}" role="button" tabindex="0">
+                    <span class="comet-sheen" aria-hidden="true"></span>
+                    <span class="comet-head" aria-hidden="true"></span>
+                    <i class="${icon} comet-icon" aria-hidden="true"></i>
+                    <span class="comet-text">${k.name}</span>
+                </div>
+                <span class="comet-divider" aria-hidden="true">—</span>
+            `;
+        }
+
+        const row1Items = row1.map(k => buildCometItem(k, 'left')).join('');
+        const row2Items = row2.map(k => buildCometItem(k, 'right')).join('');
+        const row3Items = row3.map(k => buildCometItem(k, 'left')).join('');
+
+        // Repeat items twice per half to guarantee seamless looping without gaps
+        const track1Half = row1Items + row1Items;
+        const track2Half = row2Items + row2Items;
+        const track3Half = row3Items + row3Items;
+
+        keywordsContainer.innerHTML = `
+            <div class="comet-stream-container">
+                <div class="comet-row comet-row-1" aria-label="Keywords Stream Westward">
+                    <div class="comet-track comet-track-left-1">
+                        ${track1Half}${track1Half}
+                    </div>
+                </div>
+                <div class="comet-row comet-row-2" aria-label="Keywords Stream Eastward">
+                    <div class="comet-track comet-track-right">
+                        ${track2Half}${track2Half}
+                    </div>
+                </div>
+                <div class="comet-row comet-row-3" aria-label="Keywords Stream Westward">
+                    <div class="comet-track comet-track-left-2">
+                        ${track3Half}${track3Half}
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
     // --- 4. Render Experience Timeline ---
@@ -216,20 +281,19 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="project-store-badges">
                                     ${proj.storeBadges.map(st => `
                                         <span class="project-store-badge">
-                                            <i class="${
-                                                st.includes('Google') || st.includes('Play') ? 'fa-brands fa-google-play' : 
-                                                st.includes('Apple') ? 'fa-brands fa-apple' : 
-                                                st.includes('TV') ? 'fa-solid fa-tv' :
-                                                st.includes('Desktop') || st.includes('Windows') ? 'fa-brands fa-windows' :
-                                                st.includes('Dart') || st.includes('Plugin') ? 'fa-solid fa-cube' :
-                                                st.includes('Android') ? 'fa-brands fa-android' : 
-                                                st.includes('Flutter') ? 'fa-solid fa-layer-group' :
-                                                st.includes('Compose') ? 'fa-solid fa-shapes' : 
-                                                st.includes('Maps') ? 'fa-solid fa-map-location-dot' : 
+                                            <i class="${st.includes('Google') || st.includes('Play') ? 'fa-brands fa-google-play' :
+                st.includes('Apple') ? 'fa-brands fa-apple' :
+                    st.includes('TV') ? 'fa-solid fa-tv' :
+                        st.includes('Desktop') || st.includes('Windows') ? 'fa-brands fa-windows' :
+                            st.includes('Dart') || st.includes('Plugin') ? 'fa-solid fa-cube' :
+                                st.includes('Android') ? 'fa-brands fa-android' :
+                                    st.includes('Flutter') ? 'fa-solid fa-layer-group' :
+                                        st.includes('Compose') ? 'fa-solid fa-shapes' :
+                                            st.includes('Maps') ? 'fa-solid fa-map-location-dot' :
                                                 st.includes('IEEE') ? 'fa-solid fa-certificate' :
-                                                st.includes('Open Source') ? 'fa-brands fa-github' :
-                                                'fa-solid fa-bolt'
-                                            }"></i>
+                                                    st.includes('Open Source') ? 'fa-brands fa-github' :
+                                                        'fa-solid fa-bolt'
+            }"></i>
                                             ${st}
                                         </span>
                                     `).join('')}
@@ -269,6 +333,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         initTiltPhysics();
     }
+
+    window.renderProjects = renderProjects;
+
+    window.filterProjectsByKeyword = function (keyword) {
+        if (typeof openKeywordProjectsModal === 'function') {
+            openKeywordProjectsModal(keyword);
+        }
+    };
 
     renderProjects('all');
 
@@ -838,6 +910,208 @@ window.closeProjectModal = function () {
 };
 
 // ==========================================================================
+// Keyword Projects Pop-Up Modal (Deterministic Matching Strategy)
+// ==========================================================================
+const KEYWORD_PROJECT_MAP = {
+    "flutter": ["akasa-mobile", "cross-share"],
+    "android (kotlin)": ["akasa-mobile", "cross-share", "andromonth-curriculum", "amcho-jagdalpur", "atms-voice"],
+    "dart plugin architecture": ["clipboard-networking", "cross-share"],
+    "p2p discovery & mdns": ["clipboard-networking", "cross-share"],
+    "websockets & real-time sync": ["cross-share", "clipboard-networking"],
+    "android tv & desktop bridge": ["cross-share"],
+    "jetpack compose": ["andromonth-curriculum", "akasa-mobile"],
+    "swift & ios": ["akasa-mobile"],
+    "java & xml legacy": ["chat-application"],
+    "mobile architecture": ["akasa-mobile", "cross-share", "andromonth-curriculum"],
+    "state management": ["akasa-mobile", "cross-share", "andromonth-curriculum"],
+    "graphql & rest apis": ["akasa-mobile", "carjoz-engine", "akasa-mcp"],
+    "system design": ["akasa-mobile", "cross-share", "clipboard-networking", "akasa-mcp"],
+    "model context protocol (mcp)": ["akasa-mcp"],
+    "offline-first sync": ["cross-share", "carjoz-engine", "amcho-jagdalpur"],
+    "app performance": ["akasa-mobile", "cross-share"],
+    "clean architecture (mvvm)": ["akasa-mobile", "andromonth-curriculum", "amcho-jagdalpur"],
+    "crash reduction (-30%)": ["akasa-mobile"],
+    "coroutines & flow": ["andromonth-curriculum", "akasa-mobile"],
+    "ai agents & tool calling": ["akasa-mcp", "smart-traffic-iot"],
+    "leakcanary & profiling": ["akasa-mobile"],
+    "ci/cd & fastlane": ["akasa-mobile"],
+    "local lan peer-to-peer": ["cross-share", "clipboard-networking"],
+    "cross-platform desktop": ["cross-share"]
+};
+
+window.openKeywordProjectsModal = function (keywordName) {
+    const backdrop = document.getElementById('keyword-modal-backdrop');
+    const content = document.getElementById('keyword-modal-content');
+    if (!backdrop || !content || !portfolioData || !portfolioData.projects) return;
+
+    const term = (keywordName || '').toLowerCase().trim();
+
+    // Find keyword info to get category & styling
+    const kwObj = (portfolioData.about && portfolioData.about.coreKeywords)
+        ? portfolioData.about.coreKeywords.find(k => k.name.toLowerCase() === term)
+        : null;
+    const catLabel = kwObj ? kwObj.cat : 'Engineering';
+
+    let icon = 'fa-brands fa-flutter';
+    if (term.includes('java') || term.includes('xml')) icon = 'fa-brands fa-java';
+    else if (term.includes('tv')) icon = 'fa-solid fa-tv';
+    else if (term.includes('android')) icon = 'fa-brands fa-android';
+    else if (term.includes('swift') || term.includes('ios')) icon = 'fa-brands fa-apple';
+    else if (term.includes('dart')) icon = 'fa-solid fa-cube';
+    else if (term.includes('socket')) icon = 'fa-solid fa-bolt';
+    else if (term.includes('lan') || term.includes('peer-to-peer')) icon = 'fa-solid fa-circle-nodes';
+    else if (term.includes('p2p') || term.includes('mdns')) icon = 'fa-solid fa-network-wired';
+    else if (term.includes('desktop')) icon = 'fa-solid fa-desktop';
+    else if (term.includes('graphql') || term.includes('rest')) icon = 'fa-solid fa-arrows-split-up-and-left';
+    else if (term.includes('fastlane') || term.includes('ci/cd')) icon = 'fa-solid fa-rocket';
+    else if (term.includes('compose')) icon = 'fa-solid fa-shapes';
+    else if (term.includes('leak') || term.includes('profiling')) icon = 'fa-solid fa-magnifying-glass-chart';
+    else if (term.includes('crash')) icon = 'fa-solid fa-shield-halved';
+    else if (term.includes('clean') || term.includes('mvvm')) icon = 'fa-solid fa-cubes';
+    else if (term.includes('state')) icon = 'fa-solid fa-arrows-spin';
+    else if (term.includes('system')) icon = 'fa-solid fa-diagram-project';
+    else if (term.includes('offline')) icon = 'fa-solid fa-cloud-arrow-down';
+    else if (term.includes('coroutines') || term.includes('flow')) icon = 'fa-solid fa-water';
+    else if (term.includes('ai') || term.includes('mcp') || term.includes('agent')) icon = 'fa-solid fa-brain';
+    else if (catLabel === 'Architecture') icon = 'fa-solid fa-layer-group';
+    else if (catLabel === 'Backend') icon = 'fa-solid fa-server';
+    else if (catLabel === 'Performance') icon = 'fa-solid fa-gauge-high';
+
+    let matchedProjects = [];
+
+    // 1. Direct explicit keyword mapping (Deterministic, 100% accurate)
+    if (KEYWORD_PROJECT_MAP[term]) {
+        const targetIds = KEYWORD_PROJECT_MAP[term];
+        matchedProjects = targetIds
+            .map(id => portfolioData.projects.find(p => p.id === id))
+            .filter(Boolean);
+    }
+
+    // 2. Strict exact tag matching (fallback for custom searches)
+    if (matchedProjects.length === 0) {
+        matchedProjects = portfolioData.projects.filter(p => {
+            return p.tags && p.tags.some(t => t.toLowerCase() === term);
+        });
+    }
+
+    content.innerHTML = `
+        <button class="modal-close-btn" onclick="closeKeywordModal()" aria-label="Close Modal">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="keyword-modal-header">
+            <div class="keyword-modal-icon-badge">
+                <i class="${icon}"></i>
+            </div>
+            <div class="keyword-modal-title-wrap">
+                <div class="keyword-modal-tags">
+                    <span class="pill-tag keyword-pill-cat">${catLabel}</span>
+                    <span class="pill-tag keyword-pill-count">${matchedProjects.length} Project${matchedProjects.length === 1 ? '' : 's'} Associated</span>
+                </div>
+                <h2 class="keyword-modal-title">Projects with <span class="keyword-glow-title">${keywordName}</span></h2>
+            </div>
+        </div>
+
+        <p class="keyword-modal-intro">
+            Curated showcase of production applications and engineering projects built by Indresh that explicitly utilize <strong>${keywordName}</strong>:
+        </p>
+
+        <div class="keyword-projects-list">
+            ${matchedProjects.length === 0 ? `
+                <div style="text-align: center; padding: 2.5rem 1rem;">
+                    <i class="fa-solid fa-layer-group" style="font-size: 2.2rem; color: var(--text-muted); margin-bottom: 1rem; display: block;"></i>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem; color: var(--text-primary);">No Direct Projects Associated Yet</h3>
+                    <p style="color: var(--text-secondary); max-width: 440px; margin: 0 auto 1.5rem; font-size: 0.9rem;">
+                        Currently, no standalone project is tagged with <strong>"${keywordName}"</strong>. Browse the full engineering catalog below.
+                    </p>
+                    <button class="btn btn-primary btn-sm" onclick="closeKeywordModal(); scrollToSection('projects');">
+                        <i class="fa-solid fa-list-check"></i> View All Projects
+                    </button>
+                </div>
+            ` : matchedProjects.map(proj => `
+                <div class="keyword-project-card">
+                    <div class="keyword-proj-head">
+                        <div class="keyword-proj-title-box">
+                            <div class="keyword-proj-icon"><i class="${proj.icon}"></i></div>
+                            <div>
+                                <div class="keyword-proj-name">${proj.title}</div>
+                                <div class="keyword-proj-tagline">${proj.tagline}</div>
+                            </div>
+                        </div>
+                        ${proj.storeBadges ? `
+                            <div class="store-badge-group">
+                                ${proj.storeBadges.map(st => `
+                                    <span class="store-badge-pill" style="font-size: 0.72rem; padding: 0.15rem 0.5rem;">
+                                        <i class="${st.includes('Google') ? 'fa-brands fa-google-play' :
+            st.includes('Apple') ? 'fa-brands fa-apple' :
+                st.includes('Desktop') || st.includes('Windows') ? 'fa-brands fa-windows' :
+                    st.includes('TV') ? 'fa-solid fa-tv' :
+                        st.includes('ChatGPT') ? 'fa-solid fa-robot' :
+                            st.includes('IEEE') ? 'fa-solid fa-certificate' :
+                                st.includes('Open Source') ? 'fa-brands fa-github' :
+                                    'fa-solid fa-bolt'
+        }"></i>
+                                        ${st}
+                                    </span>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+
+                    <p class="keyword-proj-desc">${proj.description}</p>
+
+                    ${proj.stats ? `
+                        <div class="keyword-proj-stats">
+                            ${proj.stats.map(s => `
+                                <div class="keyword-mini-stat">
+                                    <span class="stat-lbl">${s.label}:</span>
+                                    <span class="stat-val">${s.value}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    ` : ''}
+
+                    <div class="keyword-proj-footer">
+                        <div class="keyword-proj-tags">
+                            ${proj.tags.map(t => {
+            const isMatch = t.toLowerCase() === term ||
+                (t.length > 3 && term.includes(t.toLowerCase())) ||
+                (term.length > 3 && t.toLowerCase().includes(term));
+            return `<span class="pill-tag ${isMatch ? 'matched-pill' : ''}">${t}</span>`;
+        }).join('')}
+                        </div>
+                        <div class="keyword-proj-actions">
+                            <button class="btn btn-sm btn-outline" onclick="closeKeywordModal(); openProjectModal('${proj.id}');">
+                                <i class="fa-solid fa-circle-info"></i> Full Details
+                            </button>
+                            ${proj.links.github ? `
+                                <a href="${proj.links.github}" target="_blank" rel="noopener" class="btn btn-sm btn-primary" title="View Source on GitHub">
+                                    <i class="fa-brands fa-github"></i> Code
+                                </a>
+                            ` : ''}
+                            ${proj.links.live ? `
+                                <a href="${proj.links.live}" target="_blank" rel="noopener" class="btn btn-sm btn-primary" title="Live Application / Store">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit
+                                </a>
+                            ` : ''}
+                        </div>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    backdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+};
+
+window.closeKeywordModal = function () {
+    const backdrop = document.getElementById('keyword-modal-backdrop');
+    if (backdrop) backdrop.classList.remove('open');
+    document.body.style.overflow = '';
+};
+
+// ==========================================================================
 // Command Palette (Ctrl+K / Cmd+K)
 // ==========================================================================
 let renderCommandList = null;
@@ -852,6 +1126,7 @@ const COMMAND_ITEMS = [
     { title: "Akasa Air Mobile App", desc: "Production airline application for 500k+ passengers", cat: "Project", action: () => { closeCommandPalette(); openProjectModal('akasa-mobile'); } },
     { title: "CrossShare (Flutter Multi-Platform)", desc: "P2P LAN clipboard sync for Android TV, Mobile & PC", cat: "Project", action: () => { closeCommandPalette(); openProjectModal('cross-share'); } },
     { title: "clipboard_networking (Dart Plugin)", desc: "Core mDNS, WebSockets & typed protocol engine", cat: "Project", action: () => { closeCommandPalette(); openProjectModal('clipboard-networking'); } },
+    { title: "MyWhatsApp (Java & XML Android)", desc: "Real-time Firebase chat app built with native Java & XML", cat: "Project", action: () => { closeCommandPalette(); openProjectModal('chat-application'); } },
     { title: "IEEE 2024 Research Publication", desc: "AI-SIoT Hybrid Architecture for Smart Cities (CSNT 2024)", cat: "Research", action: () => { closeCommandPalette(); scrollToSection('research'); } },
     { title: "Work Experience Timeline", desc: "Akasa Air & Carjoz software engineering history", cat: "Navigation", action: () => { closeCommandPalette(); scrollToSection('experience'); } },
     { title: "Technical Skills Matrix", desc: "Flutter, Android, Micronaut, AWS, MCP", cat: "Navigation", action: () => { closeCommandPalette(); scrollToSection('skills'); } },
@@ -874,6 +1149,7 @@ const COMMAND_ITEMS = [
     },
     { title: "Open CrossShare on GitHub", desc: "github.com/Indresh10/cross_share", cat: "External", action: () => { window.open('https://github.com/Indresh10/cross_share', '_blank'); closeCommandPalette(); } },
     { title: "Open clipboard_networking on GitHub", desc: "github.com/Indresh10/clipboard_networking", cat: "External", action: () => { window.open('https://github.com/Indresh10/clipboard_networking', '_blank'); closeCommandPalette(); } },
+    { title: "Open MyWhatsApp on GitHub", desc: "github.com/Indresh10/Chat_Application", cat: "External", action: () => { window.open('https://github.com/Indresh10/Chat_Application', '_blank'); closeCommandPalette(); } },
     { title: "Open GitHub Profile", desc: "github.com/Indresh10", cat: "External", action: () => { window.open('https://github.com/Indresh10', '_blank'); closeCommandPalette(); } }
 ];
 
@@ -939,6 +1215,7 @@ function initCommandPalette() {
         } else if (e.key === 'Escape') {
             closeCommandPalette();
             closeProjectModal();
+            closeKeywordModal();
         }
     });
 
@@ -951,6 +1228,13 @@ function initCommandPalette() {
     if (projectBackdrop) {
         projectBackdrop.addEventListener('click', (e) => {
             if (e.target === projectBackdrop) closeProjectModal();
+        });
+    }
+
+    const keywordBackdrop = document.getElementById('keyword-modal-backdrop');
+    if (keywordBackdrop) {
+        keywordBackdrop.addEventListener('click', (e) => {
+            if (e.target === keywordBackdrop) closeKeywordModal();
         });
     }
 }

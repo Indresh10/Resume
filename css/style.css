@@ -2082,6 +2082,464 @@ a {
     background: rgba(168, 85, 247, 0.04);
 }
 
+/* ==========================================================================
+   Celestial Comet Keyword Streams (Alternating Directions with Lens Flares)
+   ========================================================================== */
+
+.comet-stream-ribbon {
+    position: relative;
+    padding: 2.2rem 0 2rem 0;
+    overflow: hidden;
+    transform: none !important;
+    /* Ensure card stays stable without 3D tilt */
+}
+
+/* Ambient cosmic nebula flare glows behind the streams */
+.comet-stream-ribbon::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 15%;
+    width: 480px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.16) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.comet-stream-ribbon::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: 15%;
+    width: 480px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.16) 0%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.comet-stream-ribbon .ribbon-header {
+    position: relative;
+    z-index: 1;
+    padding: 0 2.2rem;
+    margin-bottom: 1.6rem;
+}
+
+.comet-viewport {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    overflow: hidden;
+    padding: 1.6rem 0;
+    mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+
+.comet-stream-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    width: 100%;
+}
+
+.comet-row {
+    position: relative;
+    width: 100%;
+    overflow: visible;
+    display: flex;
+    padding: 0.5rem 0;
+}
+
+.comet-track {
+    display: flex;
+    width: max-content;
+    align-items: center;
+    gap: 1.25rem;
+    will-change: transform;
+    padding: 0.5rem 0;
+}
+
+/* Pause on Hover: Viewport, row, or chip hover smoothly pauses the cosmic drift */
+.comet-viewport:hover .comet-track,
+.comet-row:hover .comet-track,
+.comet-chip:hover {
+    animation-play-state: paused !important;
+}
+
+/* Infinite Continuous Marquee (Slow Cosmic Motion) */
+.comet-track-left,
+.comet-track-left-1 {
+    animation: cometScrollLeft 70s linear infinite;
+}
+
+.comet-track-right {
+    animation: cometScrollRight 78s linear infinite;
+}
+
+.comet-track-left-2 {
+    animation: cometScrollLeft 74s linear infinite;
+}
+
+@keyframes cometScrollLeft {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+@keyframes cometScrollRight {
+    0% {
+        transform: translate3d(-50%, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+/* Individual Comet Chip */
+.comet-chip {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.72rem;
+    padding: 0.65rem 1.45rem;
+    border-radius: 40px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    overflow: visible;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+/* Diagonal Lens Flare Sheen Sweep across Comet Body (Clipped to pill boundary) */
+.comet-sheen {
+    position: absolute;
+    inset: 0;
+    border-radius: 40px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.comet-sheen::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -120%;
+    width: 60%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.35) 50%, transparent 100%);
+    transform: rotate(25deg);
+    pointer-events: none;
+    opacity: 0;
+    transition: none;
+}
+
+.comet-chip:hover .comet-sheen::before {
+    left: 140%;
+    opacity: 1;
+    transition: left 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+/* Comet Head (Radiant Star Nucleus with Anamorphic Lens Flare) */
+.comet-head {
+    position: relative;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #ffffff;
+    flex-shrink: 0;
+    box-shadow:
+        0 0 6px 2px #ffffff,
+        0 0 16px 4px var(--comet-accent),
+        0 0 28px 8px var(--comet-glow);
+    z-index: 2;
+    transition: transform 0.25s ease;
+}
+
+/* Horizontal Anamorphic Lens Flare Beam */
+.comet-head::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 38px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #ffffff 40%, #ffffff 60%, var(--comet-accent), transparent);
+    box-shadow: 0 0 8px var(--comet-accent);
+    pointer-events: none;
+    opacity: 0.9;
+    transition: width 0.25s ease, opacity 0.25s ease;
+}
+
+/* Vertical Starburst Flare Ray */
+.comet-head::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 22px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, transparent, #ffffff 40%, #ffffff 60%, var(--comet-accent), transparent);
+    box-shadow: 0 0 8px var(--comet-accent);
+    pointer-events: none;
+    opacity: 0.8;
+    transition: height 0.25s ease, opacity 0.25s ease;
+}
+
+/* Row 1: Leftward moving comet (head on left, tail flaring right) */
+.comet-chip.comet-left {
+    background: linear-gradient(90deg, var(--comet-bg) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid var(--border-glass);
+    border-left: 2.5px solid var(--comet-accent);
+    box-shadow: -4px 0 16px -2px var(--comet-glow);
+}
+
+/* Row 2: Rightward moving comet (head on right, tail flaring left) */
+.comet-chip.comet-right {
+    flex-direction: row-reverse;
+    background: linear-gradient(270deg, var(--comet-bg) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border: 1px solid var(--border-glass);
+    border-right: 2.5px solid var(--comet-accent);
+    box-shadow: 4px 0 16px -2px var(--comet-glow);
+}
+
+/* Category Color Variables */
+.comet-chip.mobile {
+    --comet-accent: #00f0ff;
+    --comet-glow: rgba(0, 240, 255, 0.45);
+    --comet-bg: rgba(0, 240, 255, 0.12);
+    color: #e0faff;
+}
+
+.comet-chip.arch {
+    --comet-accent: #c084fc;
+    --comet-glow: rgba(192, 132, 252, 0.45);
+    --comet-bg: rgba(192, 132, 252, 0.12);
+    color: #f5f0ff;
+}
+
+.comet-chip.backend {
+    --comet-accent: #38bdf8;
+    --comet-glow: rgba(56, 189, 248, 0.45);
+    --comet-bg: rgba(56, 189, 248, 0.12);
+    color: #f0f9ff;
+}
+
+.comet-chip.perf {
+    --comet-accent: #34d399;
+    --comet-glow: rgba(52, 211, 153, 0.45);
+    --comet-bg: rgba(52, 211, 153, 0.12);
+    color: #ecfdf5;
+}
+
+.comet-chip.ai {
+    --comet-accent: #fbbf24;
+    --comet-glow: rgba(251, 191, 36, 0.45);
+    --comet-bg: rgba(251, 191, 36, 0.12);
+    color: #fffbeb;
+}
+
+.comet-chip .comet-icon {
+    font-size: 0.92rem;
+    color: var(--comet-accent);
+    opacity: 0.95;
+    z-index: 2;
+}
+
+.comet-chip .comet-text {
+    font-family: 'Space Grotesk', var(--font-body), sans-serif;
+    font-weight: 600;
+    z-index: 2;
+}
+
+/* Hover effects */
+.comet-chip:hover {
+    transform: translateY(-3px) scale(1.04);
+    border-color: var(--comet-accent);
+    box-shadow: 0 0 24px 4px var(--comet-glow);
+    z-index: 20;
+}
+
+.comet-chip:hover .comet-head {
+    transform: scale(1.25);
+}
+
+.comet-chip:hover .comet-head::before {
+    width: 44px;
+    opacity: 1;
+}
+
+.comet-chip:hover .comet-head::after {
+    height: 24px;
+    opacity: 1;
+}
+
+/* Celestial Divider (The Dash separator) */
+.comet-divider {
+    font-family: 'Space Grotesk', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.22);
+    margin: 0 0.2rem;
+    user-select: none;
+}
+
+/* Active Filter Pill in Projects Grid */
+.comet-filter-active-bar {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--border-radius-sm);
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    margin-bottom: 0.5rem;
+    animation: fadeIn 0.3s ease;
+}
+
+.comet-filter-active-bar span {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.comet-filter-active-bar strong {
+    color: var(--accent-cyan);
+}
+
+.comet-clear-filter-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border-glass);
+    color: var(--text-primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.comet-clear-filter-btn:hover {
+    background: var(--accent-cyan);
+    color: #090d16;
+}
+
+/* Light Mode Overrides */
+[data-theme="light"] .comet-chip {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+[data-theme="light"] .comet-chip.mobile {
+    --comet-accent: #0284c7;
+    --comet-glow: rgba(2, 132, 199, 0.25);
+    --comet-bg: rgba(2, 132, 199, 0.08);
+    color: #0c4a6e;
+    background: #ffffff;
+    border-color: rgba(2, 132, 199, 0.25);
+}
+
+[data-theme="light"] .comet-chip.arch {
+    --comet-accent: #7c3aed;
+    --comet-glow: rgba(124, 58, 237, 0.25);
+    --comet-bg: rgba(124, 58, 237, 0.08);
+    color: #4c1d95;
+    background: #ffffff;
+    border-color: rgba(124, 58, 237, 0.25);
+}
+
+[data-theme="light"] .comet-chip.backend {
+    --comet-accent: #0369a1;
+    --comet-glow: rgba(3, 105, 161, 0.25);
+    --comet-bg: rgba(3, 105, 161, 0.08);
+    color: #075985;
+    background: #ffffff;
+    border-color: rgba(3, 105, 161, 0.25);
+}
+
+[data-theme="light"] .comet-chip.perf {
+    --comet-accent: #059669;
+    --comet-glow: rgba(5, 150, 105, 0.25);
+    --comet-bg: rgba(5, 150, 105, 0.08);
+    color: #064e3b;
+    background: #ffffff;
+    border-color: rgba(5, 150, 105, 0.25);
+}
+
+[data-theme="light"] .comet-chip.ai {
+    --comet-accent: #d97706;
+    --comet-glow: rgba(217, 119, 6, 0.25);
+    --comet-bg: rgba(217, 119, 6, 0.08);
+    color: #78350f;
+    background: #ffffff;
+    border-color: rgba(217, 119, 6, 0.25);
+}
+
+[data-theme="light"] .comet-head {
+    background: var(--comet-accent);
+}
+
+[data-theme="light"] .comet-divider {
+    color: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .comet-filter-active-bar {
+    background: rgba(2, 132, 199, 0.08);
+    border-color: rgba(2, 132, 199, 0.2);
+}
+
+@media (max-width: 768px) {
+    .comet-stream-ribbon .ribbon-header {
+        padding: 0 1.2rem;
+    }
+
+    .comet-chip {
+        padding: 0.5rem 1.15rem;
+        font-size: 0.85rem;
+        gap: 0.5rem;
+    }
+
+    .comet-head::before {
+        width: 24px;
+    }
+
+    .comet-head::after {
+        height: 14px;
+    }
+
+    .comet-track-left,
+    .comet-track-left-1 {
+        animation-duration: 44s;
+    }
+
+    .comet-track-right {
+        animation-duration: 50s;
+    }
+
+    .comet-track-left-2 {
+        animation-duration: 46s;
+    }
+}
+
 /* Light Theme Adjustments for Smartphone Mockup & About */
 [data-theme="light"] .phone-device-card {
     background: linear-gradient(155deg, #e2e8f0 0%, #cbd5e1 50%, #94a3b8 100%);
@@ -3863,6 +4321,230 @@ a {
     transform: scale(1);
 }
 
+/* Keyword Projects Modal Window */
+.keyword-modal-window {
+    width: 100%;
+    max-width: 840px;
+    max-height: 88vh;
+    overflow-y: auto;
+    background: #0d111d;
+    border: 1px solid var(--border-glow);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), var(--shadow-glow);
+    padding: 2.2rem;
+    position: relative;
+    transform: scale(0.96);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop.open .keyword-modal-window {
+    transform: scale(1);
+}
+
+.keyword-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    margin-bottom: 1.2rem;
+    padding-right: 2.5rem;
+}
+
+.keyword-modal-icon-badge {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    color: var(--accent-cyan);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+}
+
+.keyword-modal-title-wrap {
+    flex: 1;
+}
+
+.keyword-modal-tags {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.keyword-pill-cat {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+    color: var(--accent-cyan);
+    border-color: rgba(0, 240, 255, 0.4);
+    background: rgba(0, 240, 255, 0.08);
+}
+
+.keyword-pill-count {
+    font-size: 0.72rem;
+    padding: 0.15rem 0.55rem;
+    color: #c084fc;
+    border-color: rgba(192, 132, 252, 0.4);
+    background: rgba(192, 132, 252, 0.08);
+}
+
+.keyword-modal-title {
+    font-size: 1.55rem;
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.25;
+}
+
+.keyword-glow-title {
+    color: var(--accent-cyan);
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
+}
+
+.keyword-modal-intro {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.keyword-projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.keyword-project-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--border-radius-md);
+    padding: 1.4rem;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.keyword-project-card:hover {
+    border-color: var(--border-glow);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.keyword-proj-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.keyword-proj-title-box {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.keyword-proj-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(0, 240, 255, 0.08);
+    border: 1px solid rgba(0, 240, 255, 0.25);
+    color: var(--accent-cyan);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.keyword-proj-name {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.keyword-proj-tagline {
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+    font-weight: 500;
+}
+
+.keyword-proj-desc {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.keyword-proj-stats {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.6rem 0.9rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.keyword-mini-stat {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+}
+
+.keyword-mini-stat .stat-lbl {
+    color: var(--text-muted);
+}
+
+.keyword-mini-stat .stat-val {
+    color: var(--accent-cyan);
+    font-weight: 700;
+}
+
+.keyword-proj-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.keyword-proj-tags {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+}
+
+.keyword-proj-tags .pill-tag {
+    font-size: 0.74rem;
+    padding: 0.2rem 0.6rem;
+}
+
+.keyword-proj-tags .pill-tag.matched-pill {
+    background: rgba(0, 240, 255, 0.15);
+    border-color: var(--accent-cyan);
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+}
+
+.keyword-proj-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-left: auto;
+}
+
 .modal-close-btn {
     position: absolute;
     top: 1.5rem;
@@ -3891,7 +4573,8 @@ a {
 }
 
 [data-theme="light"] .cmd-palette-window,
-[data-theme="light"] .project-modal-window {
+[data-theme="light"] .project-modal-window,
+[data-theme="light"] .keyword-modal-window {
     background: #ffffff;
     border-color: rgba(2, 132, 199, 0.25);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12), 0 0 25px rgba(2, 132, 199, 0.08);

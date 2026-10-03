@@ -739,17 +739,17 @@
                     <p class="section-subtitle">Production mobile applications, AI & MCP agentic tools, and full-stack systems built for performance, scale, and delightful UX.</p>
                 </div>
 
-                <!-- Core Engineering Keywords Ribbon -->
-                <div class="core-stack-ribbon tilt-card" style="margin-bottom: 2.5rem;">
+                <!-- Core Engineering Keywords Comet Stream Ribbon -->
+                <div class="core-stack-ribbon comet-stream-ribbon" style="margin-bottom: 2.8rem;">
                     <div class="ribbon-header">
                         <div>
-                            <span class="section-tag" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-layer-group"></i> Mobile & Full-Stack Tooling</span>
+                            <span class="section-tag" style="margin-bottom: 0.5rem;"><i class="fa-solid fa-meteor"></i> Systems & Tech Stack</span>
                             <h3>Core Engineering Keywords</h3>
                         </div>
-                        <span class="ribbon-action-note"><i class="fa-solid fa-lightbulb"></i> Click any keyword to search in Command Palette</span>
+                        <span class="ribbon-action-note"><i class="fa-solid fa-sparkles"></i> Hover to pause &bull; Click keyword to view projects</span>
                     </div>
-                    <div class="keyword-chips-cloud" id="about-keywords">
-                        <!-- Populated dynamically from data.js -->
+                    <div class="comet-viewport" id="about-keywords">
+                        <!-- Populated dynamically from data.js as alternating comet streams -->
                     </div>
                 </div>
 
@@ -790,51 +790,6 @@
                     <span class="section-tag"><i class="fa-solid fa-code"></i> Engineering Architecture</span>
                     <h2 class="section-title">Skills & Technologies</h2>
                     <p class="section-subtitle">Deep expertise across modern mobile toolkits (Flutter, Jetpack Compose, Kotlin, Swift), cloud microservices, and Agentic AI.</p>
-                </div>
-
-                <!-- Mobile Engineering Vitals & Quality HUD -->
-                <div class="mobile-quality-hud tilt-card">
-                    <div class="hud-top-bar">
-                        <div class="hud-title-wrap">
-                            <div class="pulse-beacon-dot"></div>
-                            <span class="hud-title">Mobile Engineering Performance & Quality Benchmarks</span>
-                        </div>
-                        <span class="hud-status-badge"><i class="fa-solid fa-circle-check"></i> Production Validated</span>
-                    </div>
-                    <div class="hud-metrics-grid">
-                        <div class="hud-metric-box">
-                            <div class="hud-metric-header">
-                                <i class="fa-solid fa-gauge-high text-cyan"></i>
-                                <span class="hud-metric-tag">FPS Target</span>
-                            </div>
-                            <div class="hud-metric-val">60 / 120 <span class="unit">FPS</span></div>
-                            <div class="hud-metric-desc">Jank-free declarative rendering across Flutter & Jetpack Compose with zero UI thread drops on heavy feeds.</div>
-                        </div>
-                        <div class="hud-metric-box">
-                            <div class="hud-metric-header">
-                                <i class="fa-solid fa-shield-virus text-emerald"></i>
-                                <span class="hud-metric-tag">Stability Target</span>
-                            </div>
-                            <div class="hud-metric-val">99.8% <span class="unit">Crash-Free</span></div>
-                            <div class="hud-metric-desc">Proactive LeakCanary memory profiling & null safety, slashing crashes by 30% across 500K+ passengers.</div>
-                        </div>
-                        <div class="hud-metric-box">
-                            <div class="hud-metric-header">
-                                <i class="fa-solid fa-stopwatch text-amber"></i>
-                                <span class="hud-metric-tag">Cold Launch</span>
-                            </div>
-                            <div class="hud-metric-val">&lt; 850 <span class="unit">ms</span></div>
-                            <div class="hud-metric-desc">Optimized bytecodes, tree-shaken dependencies & lazy initialization for instant app readiness.</div>
-                        </div>
-                        <div class="hud-metric-box">
-                            <div class="hud-metric-header">
-                                <i class="fa-solid fa-satellite-dish text-purple"></i>
-                                <span class="hud-metric-tag">State & Cache</span>
-                            </div>
-                            <div class="hud-metric-val">Offline <span class="unit">Resilient</span></div>
-                            <div class="hud-metric-desc">Local caching (Room & Hive), reactive state flows (BLoC & StateFlow), and graceful reconnection retry loops.</div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="skills-grid" id="skills-container">
@@ -961,6 +916,13 @@
     <div class="modal-backdrop" id="project-modal-backdrop">
         <div class="project-modal-window" id="project-modal-content">
             <!-- Populated dynamically on click -->
+        </div>
+    </div>
+
+    <!-- Keyword Projects Pop-Up Modal -->
+    <div class="modal-backdrop" id="keyword-modal-backdrop">
+        <div class="keyword-modal-window" id="keyword-modal-content">
+            <!-- Populated dynamically on keyword click -->
         </div>
     </div>
 

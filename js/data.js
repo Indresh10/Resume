@@ -111,7 +111,8 @@ const portfolioData = {
             { name: "Flutter", cat: "Mobile" },
             { name: "Android (Kotlin)", cat: "Mobile" },
             { name: "Dart Plugin Architecture", cat: "Mobile" },
-            { name: "P2P WebSockets & mDNS", cat: "Architecture" },
+            { name: "P2P Discovery & mDNS", cat: "Architecture" },
+            { name: "WebSockets & Real-Time Sync", cat: "Backend" },
             { name: "Android TV & Desktop Bridge", cat: "Mobile" },
             { name: "Jetpack Compose", cat: "Mobile" },
             { name: "Swift & iOS", cat: "Mobile" },
@@ -121,10 +122,16 @@ const portfolioData = {
             { name: "GraphQL & REST APIs", cat: "Backend" },
             { name: "System Design", cat: "Architecture" },
             { name: "Model Context Protocol (MCP)", cat: "AI" },
+            { name: "Offline-First Sync", cat: "Architecture" },
             { name: "App Performance", cat: "Performance" },
+            { name: "Clean Architecture (MVVM)", cat: "Architecture" },
             { name: "Crash Reduction (-30%)", cat: "Performance" },
             { name: "Coroutines & Flow", cat: "Mobile" },
-            { name: "LeakCanary & Profiling", cat: "Performance" }
+            { name: "AI Agents & Tool Calling", cat: "AI" },
+            { name: "LeakCanary & Profiling", cat: "Performance" },
+            { name: "CI/CD & Fastlane", cat: "Architecture" },
+            { name: "Local LAN Peer-to-Peer", cat: "Architecture" },
+            { name: "Cross-Platform Desktop", cat: "Mobile" }
         ]
     },
 
@@ -531,6 +538,34 @@ const portfolioData = {
                 { label: "Duration", value: "30 Days Curriculum" },
                 { label: "Modules", value: "30+ Architecture Labs" },
                 { label: "Stack", value: "Compose & Coroutines" }
+            ]
+        },
+        {
+            id: "chat-application",
+            title: "MyWhatsApp – Android Chat Application",
+            category: "mobile",
+            categories: ["mobile"],
+            categoryLabel: "Android Native (Java & XML)",
+            featured: false,
+            icon: "fa-brands fa-java",
+            tagline: "Real-Time Firebase Chat Application Built with Native Android Java & XML Layouts",
+            description: "A native Android instant messaging application developed using pure Java and custom XML layouts. Powered by Firebase Authentication and Firebase Realtime Database for instantaneous one-on-one message exchange, user status updates, profile photo management, and chat lists.",
+            highlights: [
+                "Engineered entirely with Native Android Java, Activity/Fragment lifecycle, and custom XML UI layouts",
+                "Real-time bidirectional message sync using Firebase Realtime Database with event listeners",
+                "Secure user registration, authentication, and password reset flows with Firebase Auth",
+                "Custom chat bubble drawables (chat_item_left / chat_item_right) and modular RecyclerView adapters",
+                "Tabbed interface with ViewPager and TabLayout managing active Chats, Users, and Profile fragments"
+            ],
+            tags: ["Java", "Android XML", "Firebase Realtime DB", "Firebase Auth", "RecyclerView", "Android SDK"],
+            storeBadges: ["Android Native", "Java & XML", "Firebase", "Open Source"],
+            links: {
+                github: "https://github.com/Indresh10/Chat_Application"
+            },
+            stats: [
+                { label: "Language", value: "Java & XML" },
+                { label: "Backend", value: "Firebase Realtime" },
+                { label: "UI System", value: "Custom XML Layouts" }
             ]
         },
         {
