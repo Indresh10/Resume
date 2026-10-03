@@ -834,13 +834,13 @@ window.openProjectModal = function (projectId) {
             <i class="fa-solid fa-xmark"></i>
         </button>
 
-        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
-            <div class="project-icon-box" style="width: 56px; height: 56px; font-size: 1.6rem;">
+        <div style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; width: 100%; min-width: 0;">
+            <div class="project-icon-box" style="width: 56px; height: 56px; font-size: 1.6rem; flex-shrink: 0; margin-top: 4px;">
                 <i class="${proj.icon}"></i>
             </div>
-            <div>
+            <div style="flex: 1; min-width: 0; overflow-wrap: anywhere; word-break: break-word;">
                 <span class="pill-tag" style="color: var(--accent-cyan); border-color: var(--accent-cyan);">${proj.categoryLabel}</span>
-                <h2 style="font-size: 1.8rem; margin-top: 0.3rem;">${proj.title}</h2>
+                <h2 style="font-size: 1.8rem; margin-top: 0.3rem; overflow-wrap: anywhere; word-break: break-word; line-height: 1.25;">${proj.title}</h2>
             </div>
         </div>
 
@@ -1033,7 +1033,7 @@ window.openKeywordProjectsModal = function (keywordName) {
                     <div class="keyword-proj-head">
                         <div class="keyword-proj-title-box">
                             <div class="keyword-proj-icon"><i class="${proj.icon}"></i></div>
-                            <div>
+                            <div class="keyword-proj-title-text">
                                 <div class="keyword-proj-name">${proj.title}</div>
                                 <div class="keyword-proj-tagline">${proj.tagline}</div>
                             </div>
