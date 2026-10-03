@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const filtered = filter === 'all'
             ? projects
-            : projects.filter(p => p.category === filter);
+            : projects.filter(p => p.category === filter || (Array.isArray(p.categories) && p.categories.includes(filter)));
 
         projectsContainer.innerHTML = filtered.map(proj => `
             <div class="tilt-card project-card ${proj.category === 'mobile' ? 'mobile-project-card' : ''}" data-category="${proj.category}" onclick="openProjectModal('${proj.id}')">
@@ -216,7 +216,20 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <div class="project-store-badges">
                                     ${proj.storeBadges.map(st => `
                                         <span class="project-store-badge">
-                                            <i class="${st.includes('Google') || st.includes('Play') ? 'fa-brands fa-google-play' : st.includes('Apple') ? 'fa-brands fa-apple' : st.includes('Android') ? 'fa-brands fa-android' : st.includes('Compose') ? 'fa-solid fa-shapes' : st.includes('Maps') ? 'fa-solid fa-map-location-dot' : 'fa-solid fa-bolt'}"></i>
+                                            <i class="${
+                                                st.includes('Google') || st.includes('Play') ? 'fa-brands fa-google-play' : 
+                                                st.includes('Apple') ? 'fa-brands fa-apple' : 
+                                                st.includes('TV') ? 'fa-solid fa-tv' :
+                                                st.includes('Desktop') || st.includes('Windows') ? 'fa-brands fa-windows' :
+                                                st.includes('Dart') || st.includes('Plugin') ? 'fa-solid fa-cube' :
+                                                st.includes('Android') ? 'fa-brands fa-android' : 
+                                                st.includes('Flutter') ? 'fa-solid fa-layer-group' :
+                                                st.includes('Compose') ? 'fa-solid fa-shapes' : 
+                                                st.includes('Maps') ? 'fa-solid fa-map-location-dot' : 
+                                                st.includes('IEEE') ? 'fa-solid fa-certificate' :
+                                                st.includes('Open Source') ? 'fa-brands fa-github' :
+                                                'fa-solid fa-bolt'
+                                            }"></i>
                                             ${st}
                                         </span>
                                     `).join('')}
@@ -807,7 +820,7 @@ window.openProjectModal = function (projectId) {
                 </a>
             ` : ''}
             ${proj.links.github ? `
-                <a href="${proj.links.github}" target="_blank" rel="noopener" class="btn btn-outline">
+                <a href="${proj.links.github}" target="_blank" rel="noopener" class="btn ${(!proj.links.live && !proj.links.chatgpt) ? 'btn-primary' : 'btn-outline'}">
                     <i class="fa-brands fa-github"></i> View GitHub Repo
                 </a>
             ` : ''}
@@ -837,6 +850,8 @@ const COMMAND_ITEMS = [
     { title: "Akasa Air on ChatGPT (MCP)", desc: "Showcase of Model Context Protocol integration", cat: "Feature", action: () => { closeCommandPalette(); scrollToSection('mcp-playground'); } },
     { title: "Open Akasa Air in ChatGPT", desc: "Try the live ChatGPT extension", cat: "ChatGPT App", action: () => { window.open('https://chatgpt.com/plugins/plugin_asdk_app_69ef573311908191975c1bfb3baa12fc?q=akasa', '_blank'); closeCommandPalette(); } },
     { title: "Akasa Air Mobile App", desc: "Production airline application for 500k+ passengers", cat: "Project", action: () => { closeCommandPalette(); openProjectModal('akasa-mobile'); } },
+    { title: "CrossShare (Flutter Multi-Platform)", desc: "P2P LAN clipboard sync for Android TV, Mobile & PC", cat: "Project", action: () => { closeCommandPalette(); openProjectModal('cross-share'); } },
+    { title: "clipboard_networking (Dart Plugin)", desc: "Core mDNS, WebSockets & typed protocol engine", cat: "Project", action: () => { closeCommandPalette(); openProjectModal('clipboard-networking'); } },
     { title: "IEEE 2024 Research Publication", desc: "AI-SIoT Hybrid Architecture for Smart Cities (CSNT 2024)", cat: "Research", action: () => { closeCommandPalette(); scrollToSection('research'); } },
     { title: "Work Experience Timeline", desc: "Akasa Air & Carjoz software engineering history", cat: "Navigation", action: () => { closeCommandPalette(); scrollToSection('experience'); } },
     { title: "Technical Skills Matrix", desc: "Flutter, Android, Micronaut, AWS, MCP", cat: "Navigation", action: () => { closeCommandPalette(); scrollToSection('skills'); } },
@@ -857,6 +872,8 @@ const COMMAND_ITEMS = [
             }
         }
     },
+    { title: "Open CrossShare on GitHub", desc: "github.com/Indresh10/cross_share", cat: "External", action: () => { window.open('https://github.com/Indresh10/cross_share', '_blank'); closeCommandPalette(); } },
+    { title: "Open clipboard_networking on GitHub", desc: "github.com/Indresh10/clipboard_networking", cat: "External", action: () => { window.open('https://github.com/Indresh10/clipboard_networking', '_blank'); closeCommandPalette(); } },
     { title: "Open GitHub Profile", desc: "github.com/Indresh10", cat: "External", action: () => { window.open('https://github.com/Indresh10', '_blank'); closeCommandPalette(); } }
 ];
 

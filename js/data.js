@@ -110,6 +110,9 @@ const portfolioData = {
         coreKeywords: [
             { name: "Flutter", cat: "Mobile" },
             { name: "Android (Kotlin)", cat: "Mobile" },
+            { name: "Dart Plugin Architecture", cat: "Mobile" },
+            { name: "P2P WebSockets & mDNS", cat: "Architecture" },
+            { name: "Android TV & Desktop Bridge", cat: "Mobile" },
             { name: "Jetpack Compose", cat: "Mobile" },
             { name: "Swift & iOS", cat: "Mobile" },
             { name: "Java & XML Legacy", cat: "Mobile" },
@@ -139,6 +142,7 @@ const portfolioData = {
             skills: [
                 { name: "Flutter", level: "Expert", icon: "devicon-flutter-plain" },
                 { name: "Android Native & Jetpack Compose", level: "Advanced", icon: "devicon-android-plain" },
+                { name: "Dart Plugins & Packages", level: "Specialized", icon: "fa-solid fa-cube" },
                 { name: "Kotlin", level: "Advanced", icon: "devicon-kotlin-plain" },
                 { name: "iOS Native (Swift)", level: "Intermediate", icon: "devicon-swift-plain" },
                 { name: "Mobile Architecture (Clean/MVVM)", level: "Expert", icon: "fa-solid fa-layer-group" },
@@ -164,6 +168,7 @@ const portfolioData = {
             icon: "fa-solid fa-server",
             skills: [
                 { name: "Micronaut", level: "Advanced", icon: "fa-solid fa-microchip" },
+                { name: "P2P WebSockets & mDNS (DNS-SD)", level: "Specialized", icon: "fa-solid fa-network-wired" },
                 { name: "Spring Boot", level: "Advanced", icon: "devicon-spring-plain" },
                 { name: "Django & Python", level: "Advanced", icon: "devicon-django-plain" },
                 { name: "FastAPI & Flask", level: "Intermediate", icon: "devicon-fastapi-plain" },
@@ -370,6 +375,62 @@ const portfolioData = {
                 { label: "Active Passengers", value: "500K+" },
                 { label: "Crash Drop", value: "-30%" },
                 { label: "Cadence", value: "Bi-weekly Releases" }
+            ]
+        },
+        {
+            id: "cross-share",
+            title: "CrossShare – Peer-to-Peer LAN Clipboard Bridge",
+            category: "mobile",
+            categories: ["mobile"],
+            categoryLabel: "Flutter & Multi-Platform",
+            featured: true,
+            icon: "fa-solid fa-share-nodes",
+            tagline: "Secure, Local LAN Peer-to-Peer Clipboard Bridge for Android TV, Mobile & Desktop",
+            description: "A zero-cloud, cross-platform Flutter application enabling instant, secure clipboard synchronization across Android TV, Mobile (Android/iOS), and Desktop (Windows) entirely over the local network. Operates 100% on the local LAN without external cloud infrastructure or account registrations, featuring encrypted session tokens and real-time bidirectional syncing.",
+            highlights: [
+                "Multi-platform Flutter architecture engineered for Android TV (Receiver/IME), Mobile phones, and Windows Desktop",
+                "Cryptographic QR code pairing and single-use 6-digit numeric PINs with 5-minute session validity",
+                "Powered by custom clipboard_networking Dart plugin utilizing local WebSockets and mDNS/DNS-SD discovery",
+                "Real-time bidirectional clipboard sync stream with sensitive content masking and immediate ACK delivery confirmation",
+                "Zero cloud dependency: 100% local network privacy, sub-millisecond local transit, and offline resilience"
+            ],
+            tags: ["Flutter", "Dart", "Android TV", "Windows Desktop", "WebSockets", "mDNS / DNS-SD", "P2P Networking"],
+            storeBadges: ["Flutter Multi-Platform", "Android TV & Desktop", "Open Source"],
+            links: {
+                github: "https://github.com/Indresh10/cross_share"
+            },
+            stats: [
+                { label: "Platforms", value: "TV, Mobile & Desktop" },
+                { label: "Architecture", value: "P2P WebSockets" },
+                { label: "Cloud Dep", value: "0% (Local LAN)" }
+            ]
+        },
+        {
+            id: "clipboard-networking",
+            title: "clipboard_networking – Dart P2P Protocol Engine",
+            category: "mobile",
+            categories: ["mobile", "backend"],
+            categoryLabel: "Dart Plugin & Networking Engine",
+            featured: true,
+            icon: "fa-solid fa-network-wired",
+            tagline: "Core Networking, LAN Discovery, Custom JSON Envelope Protocol & Pairing Plugin",
+            description: "A standalone, highly modular Dart networking plugin powering the CrossShare ecosystem. Implements mDNS/DNS-SD discovery (_clipboard._tcp), an asynchronous WebSocket server/client architecture with auto-reconnect and exponential backoff, a 10-message typed JSON envelope protocol, and single-use cryptographic token pairing.",
+            highlights: [
+                "Zero-configuration DNS-SD / mDNS service discovery & advertisement (_clipboard._tcp) via pluggable interfaces",
+                "10 standardized typed network envelope messages: HELLO, DEVICE_INFO, PAIR_REQUEST, PAIR_RESPONSE, PAIR_COMPLETE, CLIPBOARD, ACK, PING, PONG, DISCONNECT",
+                "Resilient transport architecture: WebSocketLanServer (TV) and WebSocketLanClient (Mobile/PC) with exponential backoff & heartbeats",
+                "High-level turnkey facades: ClipboardSharerReceiver (TV) and ClipboardSharerClient (Mobile/Desktop)",
+                "Comprehensive test suites with in-memory MockDiscoveryHub and strict FVM Dart static analysis"
+            ],
+            tags: ["Dart Plugin", "DNS-SD / mDNS", "WebSockets", "P2P Protocol", "JSON-RPC", "Open Source Engine"],
+            storeBadges: ["Dart Plugin", "Open Source Engine"],
+            links: {
+                github: "https://github.com/Indresh10/clipboard_networking"
+            },
+            stats: [
+                { label: "Package Type", value: "Dart Plugin" },
+                { label: "Message Types", value: "10 Typed Frames" },
+                { label: "LAN Discovery", value: "DNS-SD / mDNS" }
             ]
         },
         {
